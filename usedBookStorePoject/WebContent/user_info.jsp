@@ -25,19 +25,19 @@
 <table>
 	<tr>
 		<td>아이디 : </td>
-		<td>${user.user_id }</td>
+		<td>${viewUser.user_id }</td>
 	</tr>
 	<tr>
 		<td>비밀번호 : </td>
-		<td>${user.user_password}</td>
+		<td>${viewUser.user_password}</td>
 	</tr>
 	<tr>
 		<td>이메일 주소 : </td>
-		<td>${user.user_email}</td>
+		<td>${viewUser.user_email}</td>
 	</tr>
 	<tr>
 		<td> 회원 등급 : </td>
-		<td>${user.user_grade}</td>
+		<td>${viewUser.user_grade}</td>
 	</tr>
 	<tr>
 		<td colspan=2>

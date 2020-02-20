@@ -113,7 +113,7 @@ public class UserDAO {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, user_id);
 			rs=pstmt.executeQuery();
-			
+			System.out.println("dao에서 확인하는 겟유저 변수"+user_id);
 			if(rs.next()){
 			ub=new UserBean();
 			ub.setUser_id(rs.getString("user_serial_number"));

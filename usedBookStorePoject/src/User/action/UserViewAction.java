@@ -31,6 +31,7 @@ public class UserViewAction implements Action{
 	   		forward = new ActionForward();
 	   		String viewId=request.getParameter("id");
 	   		UserViewService userViewService = new UserViewService();
+	   		System.out.println(viewId);
 	   		UserBean viewUser= userViewService.getUser(viewId);
 	   		request.setAttribute("viewUser", viewUser);
 	   		forward.setPath("./user_info.jsp");
