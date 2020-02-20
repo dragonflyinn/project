@@ -1,14 +1,17 @@
 package notice.action;
 
 import java.io.PrintWriter;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import svc.BoardWriteProService;
 import vo.ActionForward;
 import vo.NoticeBean;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import action.Action;
+import notice.svc.NoticeWriteProService;
 
 public class NoticeWriteProAction implements Action {
 
@@ -29,8 +32,8 @@ public class NoticeWriteProAction implements Action {
 		boardBean = new NoticeBean();
 		boardBean.setBOARD_NAME(multi.getParameter("BOARD_NAME"));
 		boardBean.setBOARD_PASS(multi.getParameter("BOARD_PASS"));
-		boardBean.setBOARD_SUBJECT(multi.getParameter("BOARD_SUBJECT"));
-		boardBean.setBOARD_CONTENT(multi.getParameter("BOARD_CONTENT"));
+		boardBean.setBOARD_SUBJECT(multi.getParameter("board_subject"));
+		boardBean.setBOARD_CONTENT(multi.getParameter("board_content"));
 		boardBean.setBOARD_FILE(
 		multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
 		NoticeWriteProService boardWriteProService = new NoticeWriteProService();
@@ -40,7 +43,7 @@ public class NoticeWriteProAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('��Ͻ���')");
+			out.println("alert('등록실패')");
 			out.println("history.back();");
 			out.println("</script>");
 		}

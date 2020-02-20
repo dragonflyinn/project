@@ -1,9 +1,10 @@
 package notice.svc;
 
 import static db.JdbcUtil.*;
+
 import java.sql.Connection;
 import vo.NoticeBean;
-import dao.BoardDAO;
+import dao.NoticeDAO;
 
 public class NoticeModifyProService {
 
@@ -12,9 +13,9 @@ public class NoticeModifyProService {
 		
 		boolean isArticleWriter = false;
 		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		isArticleWriter = boardDAO.isArticleBoardWriter(board_num, pass);
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(con);
+		isArticleWriter = noticeDAO.isArticleBoardWriter(board_num, pass);
 		close(con);
 		return isArticleWriter;
 		
@@ -25,9 +26,9 @@ public class NoticeModifyProService {
 		
 		boolean isModifySuccess = false;
 		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		int updateCount = boardDAO.updateArticle(article);
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(con);
+		int updateCount = noticeDAO.updateArticle(article);
 		
 		if(updateCount > 0){
 			commit(con);

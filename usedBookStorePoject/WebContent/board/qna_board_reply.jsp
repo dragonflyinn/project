@@ -1,14 +1,14 @@
-<%@page import="vo.BoardBean"%>
+<%@page import="vo.NoticeBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%
-	BoardBean article=(BoardBean)request.getAttribute("article");
+	NoticeBean article=(NoticeBean)request.getAttribute("article");
     String nowPage = (String)request.getAttribute("page");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>MVC 게시판</title>
+<title>고객센터 게시판</title>
 <script language="javascript">
 	</script>
 <style type="text/css">
@@ -49,34 +49,34 @@ table {
 
 	<section id="writeForm">
 		<h2>게시판글등록</h2>
-		<form action="boardReplyPro.bo" method="post" name="boardform">
+		<form action="boardReplyPro.board" method="post" name="boardform">
 			<input type="hidden" name="page" value="<%=nowPage %>" /> <input
-				type="hidden" name="BOARD_NUM" value="<%=article.getBOARD_NUM() %>">
-			<input type="hidden" name="BOARD_RE_REF"
-				value="<%=article.getBOARD_RE_REF() %>"> <input
-				type="hidden" name="BOARD_RE_LEV"
-				value="<%=article.getBOARD_RE_LEV() %>"> <input
-				type="hidden" name="BOARD_RE_SEQ"
-				value="<%=article.getBOARD_RE_SEQ() %>">
+				type="hidden" name="board_num" value="<%=article.getBoard_num() %>">
+			<input type="hidden" name="board_re_ref"
+				value="<%=article.getBoard_re_ref() %>"> <input
+				type="hidden" name="board_re_lev"
+				value="<%=article.getBoard_re_lev() %>"> <input
+				type="hidden" name="board_re_seq"
+				value="<%=article.getBoard_re_seq() %>">
 			<table>
 				<tr>
-					<td class="td_left"><label for="BOARD_NAME">글쓴이</label></td>
-					<td class="td_right"><input type="text" name="BOARD_NAME"
-						id="BOARD_NAME" /></td>
+					<td class="td_left"><label for="board_name">글쓴이</label></td>
+					<td class="td_right"><input type="text" name="board_name"
+						id="board_name" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="BOARD_PASS">비밀번호</label></td>
-					<td class="td_right"><input name="BOARD_PASS" type="password"
-						id="BOARD_PASS" /></td>
+					<td class="td_left"><label for="board_pass">비밀번호</label></td>
+					<td class="td_right"><input name="board_pass" type="password"
+						id="board_pass" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="BOARD_SUBJECT">제 목</label></td>
-					<td class="td_right"><input name="BOARD_SUBJECT" type="text"
-						id="BOARD_SUBJECT" /></td>
+					<td class="td_left"><label for="board_subject">제 목</label></td>
+					<td class="td_right"><input name="board_subject" type="text"
+						id="board_subject" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="BOARD_CONTENT">내 용</label></td>
-					<td><textarea id="BOARD_CONTENT" name="BOARD_CONTENT"
+					<td class="td_left"><label for="board_content">내 용</label></td>
+					<td><textarea id="board_content" name="board_content"
 							cols="40" rows="15"></textarea></td>
 				</tr>
 			</table>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MVC 게시판</title>
+<title>고객센터 게시판</title>
 <style type="text/css">
 #registForm {
 	width: 500px;
@@ -42,33 +42,28 @@ table {
 
 	<section id="writeForm">
 		<h2>게시판글등록</h2>
-		<form action="boardWritePro.bo" method="post"
+		<form action="boardWritePro.board" method="post"
 			enctype="multipart/form-data" name="boardform">
 			<table>
 				<tr>
-					<td class="td_left"><label for="BOARD_NAME">글쓴이</label></td>
-					<td class="td_right"><input type="text" name="BOARD_NAME"
-						id="BOARD_NAME" required="required" /></td>
+					<td class="td_left"><label for="board_name">글쓴이</label></td>
+					<td class="td_right"><input type="text" name="board_name"
+						id="board_name" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="BOARD_PASS">비밀번호</label></td>
-					<td class="td_right"><input name="BOARD_PASS" type="password"
-						id="BOARD_PASS" required="required" /></td>
+					<td class="td_left"><label for="board_pass">비밀번호</label></td>
+					<td class="td_right"><input name="board_pass" type="password"
+						id="board_pass" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="BOARD_SUBJECT">제 목</label></td>
-					<td class="td_right"><input name="BOARD_SUBJECT" type="text"
-						id="BOARD_SUBJECT" required="required" /></td>
+					<td class="td_left"><label for="board_subject">제 목</label></td>
+					<td class="td_right"><input name="board_subject" type="text"
+						id="board_subject" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="BOARD_CONTENT">내 용</label></td>
-					<td><textarea id="BOARD_CONTENT" name="BOARD_CONTENT"
+					<td class="td_left"><label for="board_content">내 용</label></td>
+					<td><textarea id="board_content" name="board_content"
 							cols="40" rows="15" required="required"></textarea></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="BOARD_FILE"> 파일 첨부 </label></td>
-					<td class="td_right"><input name="BOARD_FILE" type="file"
-						id="BOARD_FILE" required="required" /></td>
 				</tr>
 			</table>
 			<section id="commandCell">

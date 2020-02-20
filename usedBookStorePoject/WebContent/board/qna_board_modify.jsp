@@ -1,14 +1,14 @@
-<%@page import="vo.BoardBean"%>
+<%@page import="vo.NoticeBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%
-	BoardBean article = (BoardBean)request.getAttribute("article");
+	NoticeBean article = (NoticeBean)request.getAttribute("article");
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8"> 
-	<title>MVC 게시판</title>
+	<title>고객센터 게시판</title>
 	<script type="text/javascript">
 	function modifyboard(){
 		modifyform.submit();
@@ -47,40 +47,40 @@
 
 <section id = "writeForm">
 <h2>게시판글수정</h2>
-<form action="boardModifyPro.bo" method="post" name = "modifyform"
+<form action="boardModifyPro.board" method="post" name = "modifyform"
 >
-<input type = "hidden" name = "BOARD_NUM" value = "<%=article.getBOARD_NUM()%>"/>
+<input type = "hidden" name = "board_num" value = "<%=article.getBoard_num()%>"/>
 <table>
 	<tr>
 		<td class="td_left">
-			<label for = "BOARD_NAME">글쓴이</label>
+			<label for = "board_name">글쓴이</label>
 		</td>
 		<td class="td_right">
-			<input type = "text" name="BOARD_NAME" id = "BOARD_NAME" value = "<%=article.getBOARD_NAME()%>"/>
+			<input type = "text" name="board_name" id = "board_name" value = "<%=article.getBoard_name()%>"/>
 		</td>
 	</tr>
 	<tr>
 		<td class="td_left">
-			<label for = "BOARD_PASS">비밀번호</label>
+			<label for = "board_pass">비밀번호</label>
 		</td>
 		<td class="td_right">
-			<input name="BOARD_PASS" type="password" id = "BOARD_PASS"/>
+			<input name="board_pass" type="password" id = "board_pass"/>
 		</td>
 	</tr>
 	<tr>
 		<td class="td_left">
-			<label for = "BOARD_SUBJECT">제 목</label>
+			<label for = "board_subject">제 목</label>
 		</td>
 		<td class="td_right">
-			<input name="BOARD_SUBJECT" type="text" id = "BOARD_SUBJECT" value = "<%=article.getBOARD_SUBJECT()%>"/>
+			<input name="board_subject" type="text" id = "board_subject" value = "<%=article.getBoard_subject()%>"/>
 		</td>
 	</tr>
 	<tr>
 		<td class="td_left">
-			<label for = "BOARD_CONTENT">내 용</label>
+			<label for = "board_content">내 용</label>
 		</td>
 		<td>
-			<textarea id = "BOARD_CONTENT" name="BOARD_CONTENT" cols="40" rows="15"><%=article.getBOARD_CONTENT()%></textarea>
+			<textarea id = "board_content" name="board_content" cols="40" rows="15"><%=article.getBoard_content()%></textarea>
 		</td>
 	</tr>
 </table>

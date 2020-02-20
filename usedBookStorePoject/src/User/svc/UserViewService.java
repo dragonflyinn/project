@@ -12,7 +12,7 @@ public class UserViewService {
 		Connection con = getConnection();
 		UserDAO userDAO = UserDAO.getInstance();
 		userDAO.setConnection(con);
-		UserBean user = userDAO.selectUser(viewId);
+		UserBean user = userDAO.getUser(viewId);
 		close(con);
 		return user;
 	}

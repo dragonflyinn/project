@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,10 @@
 	<tr>
 		<td>이메일 주소 : </td>
 		<td>${user.user_email}</td>
+	</tr>
+	<tr>
+		<td> 회원 등급 : </td>
+		<td>${user.user_grade}</td>
 	</tr>
 	<tr>
 		<td colspan=2>

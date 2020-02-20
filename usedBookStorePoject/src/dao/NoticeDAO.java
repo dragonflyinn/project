@@ -1,13 +1,14 @@
 package dao;
 
 import static db.JdbcUtil.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.sql.DataSource;
-import vo.BoardBean;
+import vo.NoticeBean;
 
 public class NoticeDAO {
 
@@ -41,7 +42,7 @@ public class NoticeDAO {
 
 
 			System.out.println("getConnection");
-			pstmt=con.prepareStatement("select count(*) from board");
+			pstmt=con.prepareStatement("select count(*) from customer_board");
 			rs = pstmt.executeQuery();
 
 			if(rs.next()){
@@ -63,8 +64,8 @@ public class NoticeDAO {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String board_list_sql="select * from board order by BOARD_RE_REF desc,BOARD_RE_SEQ asc limit ?,10";
-		ArrayList<NoticeBean> articleList = new ArrayList<BoardBean>();
+		String board_list_sql="SELECT * FROM customer_board ORDER BY board_re_ref DESC,board_re_seq ASC LIMIT ?,10";
+		ArrayList<NoticeBean> articleList = new ArrayList<NoticeBean>();
 		NoticeBean board = null;
 		int startrow=(page-1)*10; //읽기 시작할 row 번호..	
 
@@ -75,16 +76,14 @@ public class NoticeDAO {
 
 			while(rs.next()){
 				board = new NoticeBean();
-				board.setBOARD_NUM(rs.getInt("BOARD_NUM"));
-				board.setBOARD_NAME(rs.getString("BOARD_NAME"));
-				board.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
-				board.setBOARD_CONTENT(rs.getString("BOARD_CONTENT"));
-				board.setBOARD_FILE(rs.getString("BOARD_FILE"));
-				board.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF"));
-				board.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV"));
-				board.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ"));
-				board.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
-				board.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+				board.setBoard_num(rs.getInt("board_num"));
+				board.setBoard_subject(rs.getString("board_subject"));
+				board.setBoard_content(rs.getString("board_content"));
+				board.setBoard_re_ref(rs.getInt("board_re_ref"));
+				board.setBoard_re_lev(rs.getInt("board_re_lev"));
+				board.setBoard_re_seq(rs.getInt("board_re_seq"));
+				board.setBoard_readcount(rs.getInt("board_readcount"));
+				board.setBoard_date(rs.getDate("board_date"));
 				articleList.add(board);
 			}
 
@@ -108,22 +107,20 @@ public class NoticeDAO {
 
 		try{
 			pstmt = con.prepareStatement(
-					"select * from board where BOARD_NUM = ?");
+					"SELECT * FORM customer_board WHERE board_num = ?");
 			pstmt.setInt(1, board_num);
 			rs= pstmt.executeQuery();
 
 			if(rs.next()){
-				boardBean = new BoardBean();
-				boardBean.setBOARD_NUM(rs.getInt("BOARD_NUM"));
-				boardBean.setBOARD_NAME(rs.getString("BOARD_NAME"));
-				boardBean.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
-				boardBean.setBOARD_CONTENT(rs.getString("BOARD_CONTENT"));
-				boardBean.setBOARD_FILE(rs.getString("BOARD_FILE"));
-				boardBean.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF"));
-				boardBean.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV"));
-				boardBean.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ"));
-				boardBean.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
-				boardBean.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+				noticeBean = new NoticeBean();
+				noticeBean.setBoard_num(rs.getInt("board_num"));
+				noticeBean.setBoard_subject(rs.getString("board_subject"));
+				noticeBean.setBoard_content(rs.getString("board_content"));
+				noticeBean.setBoard_re_ref(rs.getInt("board_re_ref"));
+				noticeBean.setBoard_re_lev(rs.getInt("board_re_lev"));
+				noticeBean.setBoard_re_seq(rs.getInt("board_re_seq"));
+				noticeBean.setBoard_readcount(rs.getInt("board_readcount"));
+				noticeBean.setBoard_date(rs.getDate("board_date"));
 			}
 		}catch(Exception ex){
 			System.out.println("getDetail 에러 : " + ex);
@@ -132,12 +129,12 @@ public class NoticeDAO {
 			close(pstmt);
 		}
 
-		return boardBean;
+		return noticeBean;
 
 	}
 
 	//글 등록.
-	public int insertArticle(BoardBean article){
+	public int insertArticle(NoticeBean article){
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -146,7 +143,7 @@ public class NoticeDAO {
 		int insertCount=0;
 
 		try{
-			pstmt=con.prepareStatement("select max(board_num) from board");
+			pstmt=con.prepareStatement("SELECT MAX(board_num) FROM customer_board");
 			rs = pstmt.executeQuery();
 
 			if(rs.next())
@@ -154,18 +151,14 @@ public class NoticeDAO {
 			else
 				num=1;
 
-			sql="insert into board (BOARD_NUM,BOARD_NAME,BOARD_PASS,BOARD_SUBJECT,";
-			sql+="BOARD_CONTENT, BOARD_FILE, BOARD_RE_REF,"+
-					"BOARD_RE_LEV,BOARD_RE_SEQ,BOARD_READCOUNT,"+
-					"BOARD_DATE) values(?,?,?,?,?,?,?,?,?,?,now())";
+			sql="INSERT INTO customer_board (board_num,board_subject,board_content";
+			sql+="board_re_ref,board_re_lev,board_re_seq,board_readcount"+
+					"board_date) VALUES(?,?,?,?,?,?,?,?,?,?,now())";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			pstmt.setString(2, article.getBOARD_NAME());
-			pstmt.setString(3, article.getBOARD_PASS());
-			pstmt.setString(4, article.getBOARD_SUBJECT());
-			pstmt.setString(5, article.getBOARD_CONTENT());
-			pstmt.setString(6, article.getBOARD_FILE());
+			pstmt.setString(4, article.getBoard_subject());
+			pstmt.setString(5, article.getBoard_content());
 			pstmt.setInt(7, num);
 			pstmt.setInt(8, 0);
 			pstmt.setInt(9, 0);
@@ -185,25 +178,25 @@ public class NoticeDAO {
 	}
 
 	//글 답변.
-	public int insertReplyArticle(BoardBean article){
+	public int insertReplyArticle(NoticeBean article){
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String board_max_sql="select max(board_num) from board";
+		String board_max_sql="SELECT MAX(board_num) FROM customer_board";
 		String sql="";
 		int num=0;
 		int insertCount=0;
-		int re_ref=article.getBOARD_RE_REF();
-		int re_lev=article.getBOARD_RE_LEV();
-		int re_seq=article.getBOARD_RE_SEQ();
+		int re_ref=article.getBoard_re_ref();
+		int re_lev=article.getBoard_re_ref();
+		int re_seq=article.getBoard_re_seq();
 
 		try{
 			pstmt=con.prepareStatement(board_max_sql);
 			rs = pstmt.executeQuery();
 			if(rs.next())num =rs.getInt(1)+1;
 			else num=1;
-			sql="update board set BOARD_RE_SEQ=BOARD_RE_SEQ+1 where BOARD_RE_REF=? ";
-			sql+="and BOARD_RE_SEQ>?";
+			sql="UPDATE customer_board SET board_re_seq=board_re_seq+1 WHERE board_re_ref=? ";
+			sql+="AND board_re_seq>?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,re_ref);
 			pstmt.setInt(2,re_seq);
@@ -215,16 +208,13 @@ public class NoticeDAO {
 
 			re_seq = re_seq + 1;
 			re_lev = re_lev+1;
-			sql="insert into board (BOARD_NUM,BOARD_NAME,BOARD_PASS,BOARD_SUBJECT,";
-			sql+="BOARD_CONTENT, BOARD_FILE,BOARD_RE_REF,BOARD_RE_LEV,BOARD_RE_SEQ,";
-			sql+="BOARD_READCOUNT,BOARD_DATE) values(?,?,?,?,?,?,?,?,?,?,now())";
+			sql="INSERT INTO customer_board (board_num,board_subject,board_content";
+			sql+="board_re_ref,board_re_lev,board_re_seq,board_readcount";
+			sql+="board_date) VALUES(?,?,?,?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			pstmt.setString(2, article.getBOARD_NAME());
-			pstmt.setString(3, article.getBOARD_PASS());
-			pstmt.setString(4, article.getBOARD_SUBJECT());
-			pstmt.setString(5, article.getBOARD_CONTENT());
-			pstmt.setString(6, ""); //답장에는 파일을 업로드하지 않음.
+			pstmt.setString(4, article.getBoard_subject());
+			pstmt.setString(5, article.getBoard_content());
 			pstmt.setInt(7, re_ref);
 			pstmt.setInt(8, re_lev);
 			pstmt.setInt(9, re_seq);
@@ -242,17 +232,17 @@ public class NoticeDAO {
 	}
 
 	//글 수정.
-	public int updateArticle(BoardBean article){
+	public int updateArticle(NoticeBean article){
 
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
-		String sql="update board set BOARD_SUBJECT=?,BOARD_CONTENT=? where BOARD_NUM=?";
+		String sql="UPDATE customer_board SET board_subject=?,board_content=? WHERE board_num=?";
 
 		try{
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, article.getBOARD_SUBJECT());
-			pstmt.setString(2, article.getBOARD_CONTENT());
-			pstmt.setInt(3, article.getBOARD_NUM());
+			pstmt.setString(1, article.getBoard_subject());
+			pstmt.setString(2, article.getBoard_content());
+			pstmt.setInt(3, article.getBoard_num());
 			updateCount = pstmt.executeUpdate();
 		}catch(Exception ex){
 			System.out.println("boardModify 에러 : " + ex);
@@ -268,7 +258,7 @@ public class NoticeDAO {
 	public int deleteArticle(int board_num){
 
 		PreparedStatement pstmt = null;
-		String board_delete_sql="delete from board where BOARD_num=?";
+		String board_delete_sql="DELETE FROM customer_board WHERE board_num=?";
 		int deleteCount=0;
 
 		try{
@@ -290,8 +280,8 @@ public class NoticeDAO {
 
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
-		String sql="update board set BOARD_READCOUNT = "+
-				"BOARD_READCOUNT+1 where BOARD_NUM = "+board_num;
+		String sql="UPDATE customer_board SET board_readcount = "+
+				"board_readcount+1 WHERE board_num = "+board_num;
 
 		try{
 			pstmt=con.prepareStatement(sql);
@@ -313,7 +303,7 @@ public class NoticeDAO {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String board_sql="select * from board where BOARD_NUM=?";
+		String board_sql="SELECT * FROM customer_board WHERE board_num=?";
 		boolean isWriter = false;
 
 		try{

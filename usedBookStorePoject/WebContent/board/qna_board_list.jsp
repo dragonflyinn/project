@@ -1,11 +1,11 @@
 <%@page import="vo.PageInfo"%>
-<%@page import="vo.BoardBean"%>
+<%@page import="vo.NoticeBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 
 <%
-	ArrayList<BoardBean> articleList=(ArrayList<BoardBean>)request.getAttribute("articleList");
+	ArrayList<NoticeBean> articleList=(ArrayList<NoticeBean>)request.getAttribute("articleList");
     PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int listCount=pageInfo.getListCount();
 	int nowPage=pageInfo.getPage();
@@ -18,7 +18,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>MVC 게시판</title>
+<title>고객센터 게시판</title>
 <style type="text/css">
 #registForm {
 	width: 500px;
@@ -60,7 +60,7 @@ table {
 
 	<section id="listForm">
 		<h2>
-			글 목록<a href="boardWriteForm.bo">게시판글쓰기</a>
+			글 목록<a href="boardWriteForm.board">게시판글쓰기</a>
 		</h2>
 		<table>
 			<%
@@ -80,19 +80,19 @@ if(articleList != null && listCount > 0){
 			
 	%>
 			<tr>
-				<td><%=articleList.get(i).getBOARD_NUM()%></td>
+				<td><%=articleList.get(i).getBoard_num()%></td>
 
 				<td>
-					<%if(articleList.get(i).getBOARD_RE_LEV()!=0){ %> <%for(int a=0;a<=articleList.get(i).getBOARD_RE_LEV()*2;a++){ %>
+					<%if(articleList.get(i).getBoard_re_lev()!=0){ %> <%for(int a=0;a<=articleList.get(i).getBoard_re_lev()*2;a++){ %>
 					&nbsp; <%} %> ▶ <%}else{ %> ▶ <%} %> <a
-					href="boardDetail.bo?board_num=<%=articleList.get(i).getBOARD_NUM()%>&page=<%=nowPage%>">
-						<%=articleList.get(i).getBOARD_SUBJECT()%>
+					href="boardDetail.board?board_num=<%=articleList.get(i).getBoard_num()%>&page=<%=nowPage%>">
+						<%=articleList.get(i).getBoard_subject()%>
 				</a>
 				</td>
 
-				<td><%=articleList.get(i).getBOARD_NAME() %></td>
-				<td><%=articleList.get(i).getBOARD_DATE() %></td>
-				<td><%=articleList.get(i).getBOARD_READCOUNT() %></td>
+				<td><%=articleList.get(i).getBoard_name() %></td>
+				<td><%=articleList.get(i).getBoard_date() %></td>
+				<td><%=articleList.get(i).getBoard_readcount() %></td>
 			</tr>
 			<%} %>
 		</table>
@@ -102,14 +102,14 @@ if(articleList != null && listCount > 0){
 		<%if(nowPage<=1){ %>
 		[이전]&nbsp;
 		<%}else{ %>
-		<a href="boardList.bo?page=<%=nowPage-1 %>">[이전]</a>&nbsp;
+		<a href="boardList.board?page=<%=nowPage-1 %>">[이전]</a>&nbsp;
 		<%} %>
 
 		<%for(int a=startPage;a<=endPage;a++){
 				if(a==nowPage){%>
 		[<%=a %>]
 		<%}else{ %>
-		<a href="boardList.bo?page=<%=a %>">[<%=a %>]
+		<a href="boardList.board?page=<%=a %>">[<%=a %>]
 		</a>&nbsp;
 		<%} %>
 		<%} %>
@@ -117,7 +117,7 @@ if(articleList != null && listCount > 0){
 		<%if(nowPage>=maxPage){ %>
 		[다음]
 		<%}else{ %>
-		<a href="boardList.bo?page=<%=nowPage+1 %>">[다음]</a>
+		<a href="boardList.board?page=<%=nowPage+1 %>">[다음]</a>
 		<%} %>
 	</section>
 	<%

@@ -1,9 +1,12 @@
 package notice.action;
 
 import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import svc.BoardDeleteProService;
+
+import action.Action;
+import notice.svc.NoticeDeleteProService;
 import vo.ActionForward;
 
 public class NoticeDeleteProAction implements Action {
@@ -21,7 +24,7 @@ public class NoticeDeleteProAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
-			out.println("alert('������ ������ �����ϴ�');");
+			out.println("alert('삭제권한이 없습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
@@ -35,7 +38,7 @@ public class NoticeDeleteProAction implements Action {
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out=response.getWriter();
 				out.println("<script>");
-				out.println("alert('��������');");
+				out.println("alert('삭제실패');");
 				out.println("history.back();");
 				out.println("</script>");
 				out.close();

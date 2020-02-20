@@ -1,9 +1,12 @@
 package notice.action;
 
 import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import svc.BoardReplyProService;
+
+import action.Action;
+import notice.svc.NoticeReplyProService;
 import vo.ActionForward;
 import vo.NoticeBean;
 
@@ -15,14 +18,12 @@ public class NoticeReplyProAction implements Action {
 		 	ActionForward forward = null;
 		    String nowPage = request.getParameter("page");
 		 	NoticeBean article = new NoticeBean();  		
-		 	article.setBOARD_NUM(Integer.parseInt(request.getParameter("BOARD_NUM")));
-		 	article.setBOARD_NAME(request.getParameter("BOARD_NAME"));
-		 	article.setBOARD_PASS(request.getParameter("BOARD_PASS"));
-		 	article.setBOARD_SUBJECT(request.getParameter("BOARD_SUBJECT"));
-		 	article.setBOARD_CONTENT(request.getParameter("BOARD_CONTENT"));
-		 	article.setBOARD_RE_REF(Integer.parseInt(request.getParameter("BOARD_RE_REF")));
-		 	article.setBOARD_RE_LEV(Integer.parseInt(request.getParameter("BOARD_RE_LEV")));
-		 	article.setBOARD_RE_SEQ(Integer.parseInt(request.getParameter("BOARD_RE_SEQ")));	   		
+		 	article.setBoard_num(Integer.parseInt(request.getParameter("BOARD_NUM")));
+		 	article.setBoard_subject(request.getParameter("BOARD_SUBJECT"));
+		 	article.setBoard_content(request.getParameter("BOARD_CONTENT"));
+		 	article.setBoard_re_ref(Integer.parseInt(request.getParameter("BOARD_RE_REF")));
+		 	article.setBoard_re_lev(Integer.parseInt(request.getParameter("BOARD_RE_LEV")));
+		 	article.setBoard_re_seq(Integer.parseInt(request.getParameter("BOARD_RE_SEQ")));	   		
 		 	NoticeReplyProService boardReplyProService = new NoticeReplyProService();
 		 	boolean isReplySuccess = boardReplyProService.replyArticle(article);
 		 	
@@ -35,7 +36,7 @@ public class NoticeReplyProAction implements Action {
 	   			response.setContentType("text/html;charset=UTF-8");
 	   			PrintWriter out = response.getWriter();
 	   			out.println("<script>");
-	   			out.println("alert('�������')");
+	   			out.println("alert('답글 실패')");
 	   			out.println("history.back()");
 	   			out.println("</script>");
 	   		}

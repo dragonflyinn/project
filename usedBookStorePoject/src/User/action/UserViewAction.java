@@ -14,19 +14,16 @@ public class UserViewAction implements Action{
 	 	throws Exception{
 		 	
 		 	HttpSession session=request.getSession();
-	   		String id=(String)session.getAttribute("id");
-	   		
+		 	UserBean loginUser = (UserBean)session.getAttribute("user");
+	   		String userGrade = loginUser.getUser_grade(); 
 	   		ActionForward forward = null;
-	   		if(id==null){
-	   			forward = new ActionForward();
-				forward.setRedirect(true);
-				forward.setPath("./UserLogin.me");
-	   		}else if(!id.equals("admin")){
-	   			response.setContentType("text/html;charset=euc-kr");
+	   		
+	   		if(!(userGrade.equals("A")||userGrade.equals("B"))){
+	   			response.setContentType("text/html;charset=UTF-8");
 		   		PrintWriter out=response.getWriter();
 		   		out.println("<script>");
 		   		out.println("alert('관리자가 아닙니다.');");
-		   		out.println("location.href='./userLogin.me';");
+		   		out.println("location.href='/UserLogin.me");
 		   		out.println("</script>");
 	   		}
 	   		
@@ -34,10 +31,15 @@ public class UserViewAction implements Action{
 	   		forward = new ActionForward();
 	   		String viewId=request.getParameter("id");
 	   		UserViewService userViewService = new UserViewService();
-	   		UserBean user= userViewService.getUser(viewId);
-	   		request.setAttribute("user", user);
+	   		UserBean viewUser= userViewService.getUser(viewId);
+	   		request.setAttribute("viewUser", viewUser);
 	   		forward.setPath("./user_info.jsp");
 	   		}
 	   		return forward;
+	}
+
+	private Object user_grade() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

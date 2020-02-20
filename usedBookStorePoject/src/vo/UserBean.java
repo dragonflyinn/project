@@ -5,7 +5,14 @@ public class UserBean {
 	private String user_id;
 	private String user_password;
 	private String user_email;
+	private String user_grade;
 	
+	public String getUser_grade() {
+		return user_grade;
+	}
+	public void setUser_grade(String user_grade) {
+		this.user_grade = user_grade;
+	}
 	public int getUser_serial_number() {
 		return user_serial_number;
 	}

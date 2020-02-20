@@ -1,23 +1,24 @@
 package notice.controller;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import action.Action;
-import action.BoardDeleteProAction;
-import action.BoardDetailAction;
-import action.BoardListAction;
-import action.BoardModifyFormAction;
-import action.BoardModifyProAction;
-import action.BoardReplyFormAction;
-import action.BoardReplyProAction;
-import action.BoardWriteProAction;
+import notice.action.NoticeDeleteProAction;
+import notice.action.NoticeDetailAction;
+import notice.action.NoticeListAction;
+import notice.action.NoticeModifyFormAction;
+import notice.action.NoticeModifyProAction;
+import notice.action.NoticeReplyFormAction;
+import notice.action.NoticeReplyProAction;
+import notice.action.NoticeWriteProAction;
 import vo.ActionForward;
 
-@WebServlet("*.bo")
+@WebServlet("*.board")
 public class NoticeFrontController extends javax.servlet.http.HttpServlet 
 {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
@@ -30,10 +31,10 @@ public class NoticeFrontController extends javax.servlet.http.HttpServlet
 		ActionForward forward=null;
 		Action action=null;
 
-		if(command.equals("/boardWriteForm.bo")){
+		if(command.equals("/boardWriteForm.board")){
 			forward=new ActionForward();
 			forward.setPath("/board/qna_board_write.jsp");
-		}else if(command.equals("/boardWritePro.bo")){
+		}else if(command.equals("/boardWritePro.board")){
 			action  = new NoticeWriteProAction();
 			try {
 				forward=action.execute(request, response );
@@ -41,7 +42,7 @@ public class NoticeFrontController extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/boardList.bo")){
+		else if(command.equals("/boardList.board")){
 			action = new NoticeListAction();
 			try{
 				forward=action.execute(request, response);
@@ -49,7 +50,7 @@ public class NoticeFrontController extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/boardDetail.bo")){
+		else if(command.equals("/boardDetail.board")){
 			action = new NoticeDetailAction();
 			try{
 				forward=action.execute(request, response);
@@ -57,7 +58,7 @@ public class NoticeFrontController extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/boardReplyForm.bo")){
+		else if(command.equals("/boardReplyForm.board")){
 			action = new NoticeReplyFormAction();
 			try{
 				forward=action.execute(request, response);
@@ -65,7 +66,7 @@ public class NoticeFrontController extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/boardReplyPro.bo")){
+		else if(command.equals("/boardReplyPro.board")){
 			action = new NoticeReplyProAction();
 			try{
 				forward=action.execute(request, response);
@@ -73,21 +74,21 @@ public class NoticeFrontController extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/boardModifyForm.bo")){
+		else if(command.equals("/boardModifyForm.board")){
 			action = new NoticeModifyFormAction();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		}else if(command.equals("/boardModifyPro.bo")){
+		}else if(command.equals("/boardModifyPro.board")){
 			action = new NoticeModifyProAction();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		}else if(command.equals("/boardDeleteForm.bo")){
+		}else if(command.equals("/boardDeleteForm.board")){
 			String nowPage = request.getParameter("page");
 			request.setAttribute("page", nowPage);
 			int board_num=Integer.parseInt(request.getParameter("board_num"));
@@ -95,7 +96,7 @@ public class NoticeFrontController extends javax.servlet.http.HttpServlet
 			forward=new ActionForward();
 			forward.setPath("/board/qna_board_delete.jsp");
 		}
-		else if(command.equals("/boardDeletePro.bo")){
+		else if(command.equals("/boardDeletePro.board")){
 			action = new NoticeDeleteProAction();
 			try{
 				forward=action.execute(request, response);

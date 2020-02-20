@@ -1,19 +1,20 @@
 package notice.svc;
 
 import java.sql.Connection;
-import dao.BoardDAO;
+
+import dao.NoticeDAO;
 import vo.NoticeBean;
 import static db.JdbcUtil.*;
 public class NoticeWriteProService {
 
-	public boolean registArticle(NoticeBean boardBean) throws Exception{
+	public boolean registArticle(NoticeBean noticeBean) throws Exception{
 		// TODO Auto-generated method stub
 		
 		boolean isWriteSuccess = false;
 		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		int insertCount = boardDAO.insertArticle(boardBean);
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(con);
+		int insertCount = noticeDAO.insertArticle(noticeBean);
 		
 		if(insertCount > 0){
 			commit(con);

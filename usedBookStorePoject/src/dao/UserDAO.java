@@ -27,31 +27,8 @@ public class UserDAO {
 		this.con = con;
 	}
 	
-	public String selectLoginId(UserBean user){
-		String loginId = null;
-		String sql="SELECT user_id FROM users_inform_table WHERE user_id=? AND user_password=?";
-		
-		try{
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, user.getUser_id());
-			pstmt.setString(2, user.getUser_password());
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
-				loginId = rs.getString("User_id");
-			}
-		}catch(Exception ex){
-			System.out.println(" 에러: " + ex);			
-		}finally{
-			close(rs);
-			close(pstmt);
-		}
-		
-		return loginId;
-	}
-	
 	public int insertUser(UserBean user){
-		String sql="INSERT INTO users_inform_table (user_id,user_password,user_email) VALUES (?,?,?)";
+		String sql="INSERT INTO users_inform_table (user_id,user_password,user_email,user_grade) VALUES (?,?,?,?)";
 		int insertCount=0;
 		
 		try{
@@ -60,6 +37,7 @@ public class UserDAO {
 			pstmt.setString(1, user.getUser_id());
 			pstmt.setString(2, user.getUser_password());
 			pstmt.setString(3, user.getUser_email());
+			pstmt.setString(4,  user.getUser_grade());
 			insertCount=pstmt.executeUpdate();
 			
 		}catch(Exception ex){
@@ -83,9 +61,11 @@ public class UserDAO {
 			if(rs.next()){
 				do{
 				ub=new UserBean();
+				ub.setUser_id(rs.getString("user_serial_number"));
 				ub.setUser_id(rs.getString("user_id"));
 				ub.setUser_password(rs.getString("user_password"));
 				ub.setUser_email(rs.getString("user_email"));
+				ub.setUser_grade(rs.getString("user_grade"));
 				userList.add(ub);
 				}while(rs.next());
 			}
@@ -98,20 +78,49 @@ public class UserDAO {
 		return userList;
 	}
 	
-	public UserBean selectUser(String id){
+	public UserBean selectUser(String user_id, String user_passwd){
+		String sql="SELECT * FROM users_inform_table WHERE user_id=? AND user_password=?";
+		UserBean ub = null;
+		try{
+			
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, user_passwd);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+			ub=new UserBean();
+			ub.setUser_id(rs.getString("user_serial_number"));
+			ub.setUser_id(rs.getString("user_id"));
+			ub.setUser_password(rs.getString("user_password"));
+			ub.setUser_email(rs.getString("user_email"));
+			ub.setUser_grade(rs.getString("user_grade"));
+			}
+		}catch(Exception ex){
+			System.out.println("getDeatilUser 에러: " + ex);			
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		
+		return ub;
+	}
+	public UserBean getUser(String user_id){
 		String sql="SELECT * FROM users_inform_table WHERE user_id=?";
 		UserBean ub = null;
 		try{
 			
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, user_id);
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()){
 			ub=new UserBean();
+			ub.setUser_id(rs.getString("user_serial_number"));
 			ub.setUser_id(rs.getString("user_id"));
 			ub.setUser_password(rs.getString("user_password"));
 			ub.setUser_email(rs.getString("user_email"));
+			ub.setUser_grade(rs.getString("user_grade"));
 			}
 		}catch(Exception ex){
 			System.out.println("getDeatilUser 에러: " + ex);			
@@ -123,9 +132,9 @@ public class UserDAO {
 		return ub;
 	}
 	public int deleteUser(String id){
-		String sql="DELETE users_inform_table WHERE user_id=?";
+		String sql="DELETE from users_inform_table WHERE user_id=?";
 		int deleteCount = 0;
-
+	
 		try{
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -138,4 +147,25 @@ public class UserDAO {
 		
 		return deleteCount;
 	}
+	public int ModifyUserList(String user_id,String user_grade){
+		String sql="UPDATE users_inform_table SET user_grade = ? WHERE user_id = ?";
+		
+		int modifyCount=0;
+		
+		try{
+
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,user_grade);
+			pstmt.setString(2,user_id);
+			modifyCount=pstmt.executeUpdate();
+			
+		}catch(Exception ex){
+			System.out.println("ModifyUserList 에러: " + ex);			
+		}finally{
+			close(pstmt);
+		}
+		
+		return modifyCount;
+	}
+		
 }

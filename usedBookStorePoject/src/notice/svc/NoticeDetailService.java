@@ -1,7 +1,8 @@
 package notice.svc;
 
 import java.sql.Connection;
-import dao.BoardDAO;
+
+import dao.NoticeDAO;
 import vo.NoticeBean;
 import static db.JdbcUtil.*;
 
@@ -12,9 +13,9 @@ public class NoticeDetailService {
 		
 		NoticeBean article = null;
 		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		int updateCount = boardDAO.updateReadCount(board_num);
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(con);
+		int updateCount = noticeDAO.updateReadCount(board_num);
 		
 		if(updateCount > 0){
 			commit(con);
@@ -23,7 +24,7 @@ public class NoticeDetailService {
 			rollback(con);
 		}
 		
-		article = boardDAO.selectArticle(board_num);
+		article = noticeDAO.selectArticle(board_num);
 		close(con);
 		return article;
 		

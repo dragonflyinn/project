@@ -6,19 +6,17 @@ import java.sql.Connection;
 import dao.UserDAO;
 
 public class UserLoginService {
+//
 
-	public boolean login(UserBean user) {
+	public UserBean login(String user_id, String user_passwd) {
 		// TODO Auto-generated method stub
 		Connection con = getConnection();
 		UserDAO userDAO = UserDAO.getInstance();
 		userDAO.setConnection(con);
-		boolean loginResult = false;
-		String loginId = userDAO.selectLoginId(user);
-		if(loginId != null){
-			loginResult = true;
-		}
+		UserBean userBean = userDAO.selectUser(user_id,user_passwd);
+		
 		close(con);
-		return loginResult;
+		return userBean;
 	}
 
 }

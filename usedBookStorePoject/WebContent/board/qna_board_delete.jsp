@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8"> 
-<title>MVC 게시판</title>
+<title>고객센터 게시판</title>
 <style>
 
 	#passForm{
@@ -20,7 +20,7 @@
 </head>
 <body>
 <section id = "passForm">
-<form name="deleteForm" action="boardDeletePro.bo?board_num=<%=board_num %>" 
+<form name="deleteForm" action="boardDeletePro.board?board_num=<%=board_num %>" 
 	method="post">
 <input type = "hidden" name = "page" value = "<%=nowPage %>"/>
 <table>

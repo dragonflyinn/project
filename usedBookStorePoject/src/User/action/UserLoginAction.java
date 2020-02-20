@@ -15,17 +15,16 @@ public class UserLoginAction implements Action{
 	 	throws Exception{
 		 
 		 	HttpSession session=request.getSession();
-	   		UserBean user=new UserBean();
 	   		
-	   		user.setUser_id(request.getParameter("user_id"));
-	   		user.setUser_password(request.getParameter("user_password"));
+	   		String user_id = request.getParameter("user_id");
+	   		String user_passwd = request.getParameter("user_password");
 	   		
 	   		UserLoginService userLoginService = new UserLoginService();
-	   		boolean loginResult = userLoginService.login(user);
+	   		UserBean user = userLoginService.login(user_id,user_passwd);
 	   		ActionForward forward = null;
-	   		if(loginResult){
+	   		if(user!=null){
 	   	    forward = new ActionForward();
-	   		session.setAttribute("id", user.getUser_id());
+	   		session.setAttribute("user",user);
 	   		forward.setRedirect(true);
 	   		forward.setPath("./UserListAction.me");
 	   		}

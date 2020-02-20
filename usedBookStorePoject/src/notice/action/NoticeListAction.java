@@ -1,9 +1,12 @@
 package notice.action;
 
 import java.util.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import svc.BoardListService;
+
+import action.Action;
+import notice.svc.NoticeListService;
 import vo.ActionForward;
 import vo.NoticeBean;
 import vo.PageInfo;
@@ -21,13 +24,10 @@ import vo.PageInfo;
 		}
 		
 		NoticeListService boardListService = new NoticeListService();
-		int listCount=boardListService.getListCount(); //�� ����Ʈ ���� �޾ƿ�.
-		articleList = boardListService.getArticleList(page,limit); //����Ʈ�� �޾ƿ�.
-		//�� ������ ��.
-   		int maxPage=(int)((double)listCount/limit+0.95); //0.95�� ���ؼ� �ø� ó��.
-   		//���� �������� ������ ���� ������ ��(1, 11, 21 ��...)
+		int listCount=boardListService.getListCount(); 
+		articleList = boardListService.getArticleList(page,limit); 
+   		int maxPage=(int)((double)listCount/limit+0.95); 
    		int startPage = (((int) ((double)page / 10 + 0.9)) - 1) * 10 + 1;
-   		//���� �������� ������ ������ ������ ��.(10, 20, 30 ��...)
    	        int endPage = startPage+10-1;
 
    		if (endPage> maxPage) endPage= maxPage;

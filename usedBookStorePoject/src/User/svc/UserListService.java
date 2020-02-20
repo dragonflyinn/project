@@ -8,7 +8,7 @@ import vo.UserBean;
 
 public class UserListService {
 
-	public static ArrayList<UserBean> getUserList() {
+	public ArrayList<UserBean> getUserList() {
 		// TODO Auto-generated method stub
 		Connection con = getConnection();
 		UserDAO userDAO = UserDAO.getInstance();

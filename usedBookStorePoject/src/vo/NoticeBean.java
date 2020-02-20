@@ -4,100 +4,77 @@ import java.sql.Date;
 
 public class NoticeBean {
 	
-	private int BOARD_NUM;
-	private String BOARD_NAME;
-	private String BOARD_PASS;
-	private String BOARD_SUBJECT;
-	private String BOARD_CONTENT;
-	private String BOARD_FILE;
-	private int BOARD_RE_REF;
-	private int BOARD_RE_LEV;
-	private int BOARD_RE_SEQ;
-	private int BOARD_READCOUNT;
-	private Date BOARD_DATE;
+	private int board_serial_number;
+	private int writing_user_serial_number;
+	private int board_num;
+	private String board_subject;
+	private String board_content;
+	private int board_re_ref;
+	private int board_re_lev;
+	private int board_re_seq;
+	private int board_readcount;
+	private Date board_date;
 	
-	public int getBOARD_NUM() {
-		return BOARD_NUM;
+	public int getBoard_serial_number() {
+		return board_serial_number;
 	}
-	
-	public void setBOARD_NUM(int board_num) {
-		BOARD_NUM = board_num;
+	public void setBoard_serial_number(int board_serial_number) {
+		this.board_serial_number = board_serial_number;
 	}
-	
-	public String getBOARD_NAME() {
-		return BOARD_NAME;
+	public int getWriting_user_serial_number() {
+		return writing_user_serial_number;
 	}
-	
-	public void setBOARD_NAME(String board_name) {
-		BOARD_NAME = board_name;
+	public void setWriting_user_serial_number(int writing_user_serial_number) {
+		this.writing_user_serial_number = writing_user_serial_number;
 	}
-	
-	public String getBOARD_PASS() {
-		return BOARD_PASS;
+	public int getBoard_num() {
+		return board_num;
 	}
-	
-	public void setBOARD_PASS(String board_pass) {
-		BOARD_PASS = board_pass;
+	public void setBoard_num(int board_num) {
+		this.board_num = board_num;
 	}
-	
-	public String getBOARD_SUBJECT() {
-		return BOARD_SUBJECT;
+	public String getBoard_subject() {
+		return board_subject;
 	}
-	
-	public void setBOARD_SUBJECT(String board_subject) {
-		BOARD_SUBJECT = board_subject;
+	public void setBoard_subject(String board_subject) {
+		this.board_subject = board_subject;
 	}
-	
-	public String getBOARD_CONTENT() {
-		return BOARD_CONTENT;
+	public String getBoard_content() {
+		return board_content;
 	}
-	public void setBOARD_CONTENT(String board_content) {
-		BOARD_CONTENT = board_content;
+	public void setBoard_content(String board_content) {
+		this.board_content = board_content;
 	}
-	
-	public String getBOARD_FILE() {
-		return BOARD_FILE;
+	public int getBoard_re_ref() {
+		return board_re_ref;
 	}
-	public void setBOARD_FILE(String board_file) {
-		BOARD_FILE = board_file;
+	public void setBoard_re_ref(int board_re_ref) {
+		this.board_re_ref = board_re_ref;
 	}
-	
-	public int getBOARD_RE_REF() {
-		return BOARD_RE_REF;
+	public int getBoard_re_lev() {
+		return board_re_lev;
 	}
-	
-	public void setBOARD_RE_REF(int board_re_ref) {
-		BOARD_RE_REF = board_re_ref;
+	public void setBoard_re_lev(int board_re_lev) {
+		this.board_re_lev = board_re_lev;
 	}
-	
-	public int getBOARD_RE_LEV() {
-		return BOARD_RE_LEV;
+	public int getBoard_re_seq() {
+		return board_re_seq;
 	}
-	public void setBOARD_RE_LEV(int board_re_lev) {
-		BOARD_RE_LEV = board_re_lev;
+	public void setBoard_re_seq(int board_re_seq) {
+		this.board_re_seq = board_re_seq;
 	}
-	
-	public int getBOARD_RE_SEQ() {
-		return BOARD_RE_SEQ;
+	public int getBoard_readcount() {
+		return board_readcount;
 	}
-	public void setBOARD_RE_SEQ(int board_re_seq) {
-		BOARD_RE_SEQ = board_re_seq;
+	public void setBoard_readcount(int board_readcount) {
+		this.board_readcount = board_readcount;
+	}
+	public Date getBoard_date() {
+		return board_date;
+	}
+	public void setBoard_date(Date board_date) {
+		this.board_date = board_date;
 	}
 	
-	public int getBOARD_READCOUNT() {
-		return BOARD_READCOUNT;
-	}
-	
-	public void setBOARD_READCOUNT(int board_readcount) {
-		BOARD_READCOUNT = board_readcount;
-	}
-	
-	public Date getBOARD_DATE() {
-		return BOARD_DATE;
-	}
-	
-	public void setBOARD_DATE(Date board_date) {
-		BOARD_DATE = board_date;
-	}
 	
 }

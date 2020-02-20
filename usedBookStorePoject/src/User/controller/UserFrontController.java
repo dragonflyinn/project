@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import User.action.UserDeleteAction;
+import User.action.UserInfoModifyAction;
+import User.action.UserInfoModifyProAction;
 import User.action.UserJoinAction;
 import User.action.UserListAction;
 import User.action.UserLoginAction;
@@ -63,6 +65,20 @@ System.out.println(command);
 			}
 		}else if(command.equals("/UserDeleteAction.me")){
 			action = new UserDeleteAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/UserInfoModifyAction.me")){
+			action = new UserInfoModifyAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}else if(command.equals("/UserInfoModifyProAction.me")){
+			action = new UserInfoModifyProAction();
 			try{
 				forward=action.execute(request, response);
 			}catch(Exception e){

@@ -1,8 +1,8 @@
-<%@page import="vo.BoardBean"%>
+<%@page import="vo.NoticeBean"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"%>
 
 <%
-	BoardBean article = (BoardBean)request.getAttribute("article");
+	NoticeBean article = (NoticeBean)request.getAttribute("article");
     String nowPage = (String)request.getAttribute("page");
 %>
 
@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MVC 게시판</title>
+<title>고객센터 게시판</title>
 <style type="text/css">
 #articleForm {
 	width: 500px;
@@ -50,25 +50,20 @@ h2 {
 		<h2>글 내용 상세보기</h2>
 		<section id="basicInfoArea">
 			제 목 :
-			<%=article.getBOARD_SUBJECT()%>
-			첨부파일 :
-			<%if(!(article.getBOARD_FILE()==null)){ %>
-			<a href="file_down?downFile=<%=article.getBOARD_FILE()%>"> <%=article.getBOARD_FILE() %>
-			</a>
-			<%} %>
+			<%=article.getBoard_subject()%>
 		</section>
 		<section id="articleContentArea">
-			<%=article.getBOARD_CONTENT() %>
+			<%=article.getBoard_content() %>
 		</section>
 	</section>
 	<section id="commandList">
 		<a
-			href="boardReplyForm.bo?board_num=<%=article.getBOARD_NUM() %>&page=<%=nowPage%>">
+			href="boardReplyForm.board?board_num=<%=article.getBoard_num() %>&page=<%=nowPage%>">
 			[답변] </a> <a
-			href="boardModifyForm.bo?board_num=<%=article.getBOARD_NUM() %>">
+			href="boardModifyForm.board?board_num=<%=article.getBoard_num() %>">
 			[수정] </a> <a
-			href="boardDeleteForm.bo?board_num=<%=article.getBOARD_NUM() %>&page=<%=nowPage%>">
-			[삭제] </a> <a href="boardList.bo?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
+			href="boardDeleteForm.board?board_num=<%=article.getBoard_num() %>&page=<%=nowPage%>">
+			[삭제] </a> <a href="boardList.board?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
 	</section>
 </body>
 </html>

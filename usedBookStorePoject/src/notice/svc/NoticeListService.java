@@ -1,9 +1,10 @@
 package notice.svc;
 
 import static db.JdbcUtil.*;
+
 import java.sql.Connection;
 import java.util.ArrayList;
-import dao.BoardDAO;
+import dao.NoticeDAO;
 import vo.NoticeBean;
 
 public class NoticeListService {
@@ -13,9 +14,9 @@ public class NoticeListService {
 		
 		int listCount = 0;
 		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		listCount = boardDAO.selectListCount();
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(con);
+		listCount = noticeDAO.selectListCount();
 		close(con);
 		return listCount;
 		
@@ -25,9 +26,9 @@ public class NoticeListService {
 		
 		ArrayList<NoticeBean> articleList = null;
 		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		articleList = boardDAO.selectArticleList(page,limit);
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(con);
+		articleList = noticeDAO.selectArticleList(page,limit);
 		close(con);
 		return articleList;
 		

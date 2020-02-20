@@ -1,8 +1,9 @@
 package notice.svc;
 
 import static db.JdbcUtil.*;
+
 import java.sql.Connection;
-import dao.BoardDAO;
+import dao.NoticeDAO;
 import vo.NoticeBean;
 
 public class NoticeReplyProService {
@@ -13,9 +14,9 @@ public class NoticeReplyProService {
 		boolean isReplySuccess = false;
 		int insertCount = 0;
 		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		insertCount = boardDAO.insertReplyArticle(article);
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(con);
+		insertCount = noticeDAO.insertReplyArticle(article);
 		
 		if(insertCount > 0){
 			commit(con);

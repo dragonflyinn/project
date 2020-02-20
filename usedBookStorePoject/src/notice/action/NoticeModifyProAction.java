@@ -1,9 +1,12 @@
 package notice.action;
 
 import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import svc.BoardModifyProService;
+
+import action.Action;
+import notice.svc.NoticeModifyProService;
 import vo.ActionForward;
 import vo.NoticeBean;
 
@@ -14,7 +17,7 @@ public class NoticeModifyProAction implements Action {
 
 		ActionForward forward = null;
 		boolean isModifySuccess = false;
-		int board_num=Integer.parseInt(request.getParameter("BOARD_NUM"));
+		int board_num=Integer.parseInt(request.getParameter("board_num"));
 		NoticeBean article=new NoticeBean();
 		NoticeModifyProService boardModifyProService = new NoticeModifyProService();
 		boolean isRightUser=boardModifyProService.isArticleWriter(board_num, request.getParameter("BOARD_PASS"));
@@ -23,28 +26,28 @@ public class NoticeModifyProAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
-			out.println("alert('������ ������ �����ϴ�.');");
+			out.println("alert('수정할 권한이 없습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 		}
 		else{
-			article.setBOARD_NUM(board_num);
-			article.setBOARD_SUBJECT(request.getParameter("BOARD_SUBJECT"));
-			article.setBOARD_CONTENT(request.getParameter("BOARD_CONTENT")); 
+			article.setBoard_num(board_num);
+			article.setBoard_subject(request.getParameter("board_subject"));
+			article.setBoard_content(request.getParameter("board_content")); 
 			isModifySuccess = boardModifyProService.modifyArticle(article);
 
 			if(!isModifySuccess){
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out=response.getWriter();
 				out.println("<script>");
-				out.println("alert('��������');");
+				out.println("alert('수정실패');");
 				out.println("history.back()");
 				out.println("</script>");
 			}
 			else{
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath("boardDetail.bo?board_num="+article.getBOARD_NUM()); 
+				forward.setPath("boardDetail.bo?board_num="+article.getBoard_num()); 
 			}
 
 		}
