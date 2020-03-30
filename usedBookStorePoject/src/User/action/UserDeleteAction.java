@@ -19,14 +19,14 @@ public class UserDeleteAction implements Action {
 		if (user.getUser_id() == null) {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("./UserLogin.me");
+			forward.setPath("/userLogin.me");
 			System.out.println("아이다가 널값일때");
 		} else if (!user.getUser_id().equals("admin")) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('관리자가 아닙니다.');");
-			out.println("location.href='./UserLogin.me';");
+			out.println("location.href='/userLogin.me';");
 			out.println("</script>");
 			System.out.println("아이디가 널값도 관리자도 아닐때");
 		} else {
@@ -37,13 +37,13 @@ public class UserDeleteAction implements Action {
 			if (deleteResult) {
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath("./UserListAction.me");
+				forward.setPath("/userListAction.me");
 			} else {
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('회원정보삭제 실패.');");
-				out.println("location.href='./UserLogin.me';");
+				out.println("location.href='/userLogin.me';");
 				out.println("</script>");
 			}
 		}

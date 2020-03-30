@@ -29,15 +29,19 @@
 	<c:forEach var = "user" items = "${userList}">
 	<tr>
 		<td>
-			<a href="UserViewAction.me?id=${user.user_id}">
+			<a href="userViewAction.me?id=${user.user_id}">
 				${user.user_id}
 			</a>
 		</td>
 		<td>
-		<a href="UserDeleteAction.me?id=${user.user_id}">삭제</a>
+		<a href="userInfoModifyAction.me?id=${user.user_id}">수정</a>&nbsp;
+		<a href="userDeleteAction.me?id=${user.user_id}">삭제</a>
 		</td>
 	</tr>
-	</c:forEach>
+	</c:forEach> <!-- 반복 -->
+	<tr>
+		<td><a href="main.me">메인으로 돌아가기</a></td>
+	</tr>
 </table>
 </section>
 </body>

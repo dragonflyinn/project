@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import notice.svc.NoticeDeleteProService;
@@ -13,26 +14,27 @@ public class NoticeDeleteProAction implements Action {
 
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{	 
-
+		HttpSession session = request.getSession();
+		String user_grade = (String) session.getAttribute("user_grade");
+		String user = (String) session.getAttribute("user");
 		ActionForward forward = null;
-		int board_num=Integer.parseInt(request.getParameter("board_num"));
+		
+		int post_serial_number=Integer.parseInt(request.getParameter("post_serial_number"));
 		String nowPage = request.getParameter("page");
-		NoticeDeleteProService boardDeleteProService = new NoticeDeleteProService();
-		boolean isArticleWriter =boardDeleteProService.isArticleWriter(board_num, request.getParameter("BOARD_PASS"));
+		NoticeDeleteProService noticeDeleteProService = new NoticeDeleteProService();
 
-		if(!isArticleWriter){
+		if (!(user_grade.equals("A") || user_grade.equals("B"))) {
 			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out=response.getWriter();
+			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('삭제권한이 없습니다.');");
+			out.println("alert('삭제할 권한이 없습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
-			out.close();
 		}
 
 		else{
 			
-			boolean isDeleteSuccess = boardDeleteProService.removeArticle(board_num);
+			boolean isDeleteSuccess = noticeDeleteProService.removeArticle(post_serial_number);
 
 			if(!isDeleteSuccess){
 				response.setContentType("text/html;charset=UTF-8");
@@ -46,7 +48,7 @@ public class NoticeDeleteProAction implements Action {
 			else{
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath("boardList.bo?page=" + nowPage);
+				forward.setPath("noticeListAction.notice?page=" + nowPage);
 			}
 			
 		}

@@ -2,8 +2,11 @@ package bookboard.svc;
 
 import java.sql.Connection;
 
+
 import dao.BookBoardDAO;
+import vo.BoardBean;
 import vo.BookBoardBean;
+
 import static db.JdbcUtil.*;
 
 public class BookBoardWriteService {

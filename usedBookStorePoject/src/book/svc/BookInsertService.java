@@ -1,6 +1,6 @@
 package book.svc;
 
-import vo.BookBean;
+import vo.BookBoardBean;
 
 import static db.JdbcUtil.*;
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import dao.BookDAO;
 
 public class BookInsertService {
 
-	public boolean BookInsert(BookBean book) {
+	public boolean BookInsert(BookBoardBean book) {
 		// TODO Auto-generated method stub
 		boolean BookInsertSuccess = false;
 		BookDAO bookDAO = BookDAO.getInstance();

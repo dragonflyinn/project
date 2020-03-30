@@ -4,37 +4,44 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import notice.svc.NoticeModifyProService;
 import vo.ActionForward;
-import vo.NoticeBean;
+import vo.BoardBean;
+import vo.UserBean;
 
 public class NoticeModifyProAction implements Action {
 
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{
 
-		ActionForward forward = null;
+		HttpSession session=request.getSession();
+	 	UserBean loginUser = (UserBean)session.getAttribute("user_serial_numbber");
+   		String userGrade = loginUser.getUser_grade(); 
+   		ActionForward forward = null;
+   		
 		boolean isModifySuccess = false;
-		int board_num=Integer.parseInt(request.getParameter("board_num"));
-		NoticeBean article=new NoticeBean();
-		NoticeModifyProService boardModifyProService = new NoticeModifyProService();
-		boolean isRightUser=boardModifyProService.isArticleWriter(board_num, request.getParameter("BOARD_PASS"));
+		int post_serial_number=Integer.parseInt(request.getParameter("post_serial_number"));
+		BoardBean article=new BoardBean();
+		NoticeModifyProService noticeModifyProService = new NoticeModifyProService();
+		//여기도 세션
 
-		if(!isRightUser){
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out=response.getWriter();
-			out.println("<script>");
-			out.println("alert('수정할 권한이 없습니다.');");
-			out.println("history.back();");
-			out.println("</script>");
-		}
+		if(!(userGrade.equals("A")||userGrade.equals("B"))){
+   			response.setContentType("text/html;charset=UTF-8");
+	   		PrintWriter out=response.getWriter();
+	   		out.println("<script>");
+	   		out.println("alert('수정할 권한이 없습니다.');");
+	   		out.println("location.href='/userLogin.me");
+	   		out.println("</script>");
+   		}
+		
 		else{
-			article.setBoard_num(board_num);
-			article.setBoard_subject(request.getParameter("board_subject"));
-			article.setBoard_content(request.getParameter("board_content")); 
-			isModifySuccess = boardModifyProService.modifyArticle(article);
+			article.setPost_serial_number(post_serial_number);
+			article.setPost_title(request.getParameter("post_title"));
+			article.setPost_content(request.getParameter("post_content")); 
+			isModifySuccess = noticeModifyProService.modifyArticle(article);
 
 			if(!isModifySuccess){
 				response.setContentType("text/html;charset=UTF-8");
@@ -44,10 +51,11 @@ public class NoticeModifyProAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			}
+		
 			else{
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath("boardDetail.bo?board_num="+article.getBoard_num()); 
+				forward.setPath("noticeViewAction.notice?post_serial_number="+article.getPost_serial_number()); 
 			}
 
 		}

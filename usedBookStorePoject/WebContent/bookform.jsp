@@ -1,7 +1,20 @@
+<%@page import="vo.UserBean"%>
+<%@page import="org.apache.catalina.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	String book = (String) request.getAttribute("book");
+%>
+<%
+	UserBean user=(UserBean)session.getAttribute("user");
+	if(user.getUser_id()!=null){
+	
+	}else{
+		out.println("<script>");
+		out.println("alert('로그인을 하세요!!');");
+		out.println("location.href='loginForm.jsp';");
+		out.println("</script>");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +30,7 @@
 </style>
 </head>
 <body>
-	<form action="GetBookAction.book" method="post">
+	<form action="getBookAction.book" method="post">
 		<table>
 			<tr>
 				<td>도서 시리얼 넘버 :</td>

@@ -2,20 +2,23 @@ package notice.action;
 
 import java.util.*;
 
+
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import notice.svc.NoticeListService;
 import vo.ActionForward;
-import vo.NoticeBean;
+import vo.BoardBean;
 import vo.PageInfo;
 
  public class NoticeListAction implements Action {
 	 
 	 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		 
-		ArrayList<NoticeBean> articleList=new ArrayList<NoticeBean>();
+		ArrayList<BoardBean> articleList=new ArrayList<BoardBean>();
 	  	int page=1;
 		int limit=10;
 		
@@ -23,9 +26,9 @@ import vo.PageInfo;
 			page=Integer.parseInt(request.getParameter("page"));
 		}
 		
-		NoticeListService boardListService = new NoticeListService();
-		int listCount=boardListService.getListCount(); 
-		articleList = boardListService.getArticleList(page,limit); 
+		NoticeListService noticeListService = new NoticeListService();
+		int listCount=noticeListService.getListCount(); 
+		articleList=noticeListService.getArticleList(page,limit); //매개변수 하나 더 추가 reply
    		int maxPage=(int)((double)listCount/limit+0.95); 
    		int startPage = (((int) ((double)page / 10 + 0.9)) - 1) * 10 + 1;
    	        int endPage = startPage+10-1;
@@ -41,7 +44,7 @@ import vo.PageInfo;
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("articleList", articleList);
 		ActionForward forward= new ActionForward();
-   		forward.setPath("/board/qna_board_list.jsp");
+   		forward.setPath("/noticeBoard/notice_board_list.jsp");
    		return forward;
    		
 	 }

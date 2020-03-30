@@ -27,14 +27,17 @@ public class BookController extends javax.servlet.http.HttpServlet {
 		Action action = null;
 		System.out.println(command);
 		
-		if (command.equals("/GetBookAction.book")) {
+		if (command.equals("/getBookAction.book")) {
 			action = new GetBookAction();
 			try { 
 				forward=action.execute(request,response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		
+		} else if (command.equals("/bookform.book")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/bookform.jsp");
 		} if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());

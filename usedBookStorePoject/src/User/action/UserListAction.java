@@ -17,14 +17,14 @@ public class UserListAction implements Action {
 		HttpSession session = request.getSession();
 		UserBean user = (UserBean) session.getAttribute("user");
 		ActionForward forward = null;
-		System.out.println(user.getUser_grade());
+
 		if (!(user.getUser_grade().equals("A") || user.getUser_grade().equals("B"))) {
 			 
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('관리자가 아닙니다.');");
-			out.println("location.href='UserLogin.me';");
+			out.println("location.href='userLogin.me';");
 			out.println("</script>");
 		}
 
@@ -33,7 +33,7 @@ public class UserListAction implements Action {
 			UserListService userListService = new UserListService();
 			ArrayList<UserBean> userList = userListService.getUserList();
 			request.setAttribute("userList", userList);
-			forward.setPath("/user_list.jsp");
+			forward.setPath("/main.jsp");
 		}
 		return forward;
 	}

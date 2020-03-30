@@ -17,93 +17,103 @@ import User.action.UserViewAction;
 import vo.ActionForward;
 
 @WebServlet("*.me")
-public class UserFrontController extends javax.servlet.http.HttpServlet 
-{
+public class UserFrontController extends javax.servlet.http.HttpServlet {
 	static final long serialVersionUID = 1L;
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
+
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String RequestURI=request.getRequestURI();
-		String contextPath=request.getContextPath();
-		String command=RequestURI.substring(contextPath.length());
-		ActionForward forward=null;
-		Action action=null;
-System.out.println(command);
-		if(command.equals("/UserLogin.me")){
-			forward=new ActionForward();
+		String RequestURI = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String command = RequestURI.substring(contextPath.length());
+		ActionForward forward = null;
+		Action action = null;
+		System.out.println(command);
+		if (command.equals("/userLogin.me")) {
+			forward = new ActionForward();
 			forward.setPath("/loginForm.jsp");
-		}else if(command.equals("/UserJoin.me")){
-			forward=new ActionForward();
+		} else if (command.equals("/userJoin.me")) {
+			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/joinForm.jsp");
-		}else if(command.equals("/UserLoginAction.me")){
+		} else if (command.equals("/userModify.me")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/modifyForm.jsp");
+		} else if (command.equals("/main.me")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/main.jsp");
+		} else if (command.equals("/userLoginAction.me")) {
 			action = new UserLoginAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/UserJoinAction.me")){
+		} else if (command.equals("/userJoinAction.me")) {
 			action = new UserJoinAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/UserListAction.me")){
+		} else if (command.equals("/userListAction.me")) {
 			action = new UserListAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/UserViewAction.me")){
+		} else if (command.equals("/userViewAction.me")) {
 			action = new UserViewAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/UserDeleteAction.me")){
+		} else if (command.equals("/userDeleteAction.me")) {
 			action = new UserDeleteAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/UserInfoModifyAction.me")){
+		} else if (command.equals("/userInfoModifyAction.me")) {
 			action = new UserInfoModifyAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/UserInfoModifyProAction.me")){
+		} else if (command.equals("/userInfoModifyProAction.me")) {
 			action = new UserInfoModifyProAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		if(forward != null){
-			if(forward.isRedirect()){
+		
+		System.out.println(forward.getPath());
+		
+		if (forward != null) {
+			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
-			}else{
-				RequestDispatcher dispatcher=
-				request.getRequestDispatcher(forward.getPath());
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 		}
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doProcess(request,response);
-	}  	
+		doProcess(request, response);
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		doProcess(request,response);
-	}   	  	      	    
+		doProcess(request, response);
+	}
 }

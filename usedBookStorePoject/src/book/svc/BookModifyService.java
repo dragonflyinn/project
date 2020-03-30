@@ -4,12 +4,12 @@ import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 
-import vo.BookBean;
+import vo.BookBoardBean;
 import dao.BookDAO;
 
 public class BookModifyService {
 
-	public boolean modifyBook(BookBean book) throws Exception {
+	public boolean modifyBook(BookBoardBean book) throws Exception {
 		// TODO Auto-generated method stub
 
 		boolean isModifySuccess = false;

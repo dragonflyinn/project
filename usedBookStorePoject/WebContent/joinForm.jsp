@@ -20,7 +20,7 @@
 </head>
 <body>
 <section id = "joinformArea">
-<form name="joinform" action="./UserJoinAction.me" method="post">
+<form name="joinform" action="/userJoinAction.me" method="post">
 <table>
 	<tr>
 		<td colspan="2">

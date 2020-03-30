@@ -13,7 +13,7 @@ public class UserLoginService {
 		Connection con = getConnection();
 		UserDAO userDAO = UserDAO.getInstance();
 		userDAO.setConnection(con);
-		UserBean userBean = userDAO.selectUser(user_id,user_passwd);
+		UserBean userBean = userDAO.loginUser(user_id,user_passwd);
 		
 		close(con);
 		return userBean;

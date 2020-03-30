@@ -12,7 +12,7 @@
     
     if(id == null){
 %>
-	<a href = "loginForm.html">로그인</a>
+	<a href = "loginForm.jsp">로그인</a>
 <%
     }
     else{

@@ -4,8 +4,9 @@ import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import dao.NoticeDAO;
-import vo.NoticeBean;
+
+import dao.BoardDAO;
+import vo.BoardBean;
 
 public class NoticeListService {
 
@@ -14,21 +15,21 @@ public class NoticeListService {
 		
 		int listCount = 0;
 		Connection con = getConnection();
-		NoticeDAO noticeDAO = NoticeDAO.getInstance();
-		noticeDAO.setConnection(con);
-		listCount = noticeDAO.selectListCount();
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		boardDAO.setConnection(con);
+		listCount = boardDAO.selectListCount();
 		close(con);
 		return listCount;
 		
 	}
 
-	public ArrayList<NoticeBean> getArticleList(int page, int limit) throws Exception{
+	public ArrayList<BoardBean> getArticleList(int page, int limit) throws Exception{
 		
-		ArrayList<NoticeBean> articleList = null;
+		ArrayList<BoardBean> articleList = null;
 		Connection con = getConnection();
-		NoticeDAO noticeDAO = NoticeDAO.getInstance();
-		noticeDAO.setConnection(con);
-		articleList = noticeDAO.selectArticleList(page,limit);
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		boardDAO.setConnection(con);
+		articleList = boardDAO.selectArticleList(page,limit);
 		close(con);
 		return articleList;
 		

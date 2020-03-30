@@ -19,7 +19,7 @@
 </head>
 <body>
 <section id = "loginformArea">
-<form name="loginform" action="./UserLoginAction.me" method="post">
+<form name="loginform" action="${pageContext.request.contextPath }/userLoginAction.me" method="post">
 <table>
 	<tr>
 		<td colspan="2">

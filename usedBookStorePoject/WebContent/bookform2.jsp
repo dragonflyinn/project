@@ -72,7 +72,7 @@ table {
 	</section>
 
 
-	<form action="BookBoardWriteAction.bo" method="post" name="bookform">
+	<form action="bookBoardWriteAction.bo" method="post" name="bookform">
 		<section id="bookForm">
 			<h2>서평 등록</h2>
 
@@ -103,7 +103,7 @@ table {
 
 			<table>
 				<tr>
-					<td class="td_left"><label for="board_num">번 호</label></td>
+					<td class="td_left"><label for="post_num">번 호</label></td>
 					<td class="td_right"><h3>${article.book_serial_number}</h3></td>
 				</tr>
 				<tr>

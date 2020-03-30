@@ -2,13 +2,12 @@ package notice.action;
 
 import java.io.PrintWriter;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import vo.ActionForward;
-import vo.NoticeBean;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import vo.BoardBean;
 
 import action.Action;
 import notice.svc.NoticeWriteProService;
@@ -16,28 +15,18 @@ import notice.svc.NoticeWriteProService;
 public class NoticeWriteProAction implements Action {
 
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
-
+		HttpSession session = request.getSession();
+		BoardBean user = (BoardBean) session.getAttribute("writing_user_serial_number");
+		
 		ActionForward forward=null;
-		NoticeBean boardBean = null;
-		String realFolder="";
-		String saveFolder="/boardUpload";
-		int fileSize=5*1024*1024;
-		ServletContext context = request.getServletContext();
-		realFolder=context.getRealPath(saveFolder);   		
-		MultipartRequest multi=new MultipartRequest(request,
-				realFolder,
-				fileSize,
-				"UTF-8",
-				new DefaultFileRenamePolicy());
-		boardBean = new NoticeBean();
-		boardBean.setBOARD_NAME(multi.getParameter("BOARD_NAME"));
-		boardBean.setBOARD_PASS(multi.getParameter("BOARD_PASS"));
-		boardBean.setBOARD_SUBJECT(multi.getParameter("board_subject"));
-		boardBean.setBOARD_CONTENT(multi.getParameter("board_content"));
-		boardBean.setBOARD_FILE(
-		multi.getOriginalFileName((String)multi.getFileNames().nextElement()));
-		NoticeWriteProService boardWriteProService = new NoticeWriteProService();
-		boolean isWriteSuccess = boardWriteProService.registArticle(boardBean);
+		BoardBean boardBean = null;
+		
+		boardBean = new BoardBean();
+		boardBean.setPost_title(request.getParameter("post_title"));
+		boardBean.setPost_content(request.getParameter("post_content"));
+		
+		NoticeWriteProService noticeWriteProService = new NoticeWriteProService();
+		boolean isWriteSuccess = noticeWriteProService.registArticle(boardBean);
 
 		if(!isWriteSuccess){
 			response.setContentType("text/html;charset=UTF-8");
@@ -50,7 +39,7 @@ public class NoticeWriteProAction implements Action {
 		else{
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("boardList.bo");
+			forward.setPath("noticeListAction.notice");
 		}
 
 		return forward;

@@ -66,25 +66,25 @@ public class BookBoardDAO {
 
 	public ArrayList<BookBoardBean> selectArticleList(int book_serial_number) {
 		// TODO Auto-generated method stub
-	
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="";
-		
+		String sql = "";
+
 		ArrayList<BookBoardBean> articleList = new ArrayList<BookBoardBean>();
 		BookBoardBean board = null;
 
 		try {
 			String sql1 = "select * from book_board where book_serial_number = ? ";
-			
-			System.out.println("SQL"+sql1);
-			
+
+			System.out.println("SQL" + sql1);
+
 			pstmt = con.prepareStatement(sql1);
-			pstmt.setInt(1,book_serial_number);
-			
+			pstmt.setInt(1, book_serial_number);
+
 			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {	
+
+			while (rs.next()) {
 				board = new BookBoardBean();
 				board.setBook_serial_number(rs.getInt("book_serial_number"));
 				board.setPost_date(rs.getDate("post_date"));
@@ -93,13 +93,13 @@ public class BookBoardDAO {
 			}
 
 		} catch (Exception ex) {
-			
+
 			System.out.println("getBoardList 에러 : " + ex);
-			
+
 		} finally {
-			
+
 			close(pstmt);
-			
+
 		}
 
 		return articleList;

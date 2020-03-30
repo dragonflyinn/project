@@ -1,16 +1,15 @@
 package User.action;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import User.svc.UserInfoModifyProService;
-import User.svc.UserListService;
 import action.Action;
 import vo.ActionForward;
+
 import vo.UserBean;
 
 public class UserInfoModifyProAction implements Action {
@@ -18,26 +17,34 @@ public class UserInfoModifyProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
-		String user_grade = (String) session.getAttribute("user_grade");
-		String user = (String) session.getAttribute("user");
+		UserBean user = (UserBean) session.getAttribute("user");
+		System.out.println();
 		ActionForward forward = null;
 
-		if (!(user_grade.equals("A") || user_grade.equals("B"))) {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('수정할 권한이 없습니다.');");
-			out.println("history.back();");
-			out.println("</script>");
-		}
+		System.out.println("수정");
 
-		else {
-			forward = new ActionForward();
-			UserListService userListService = new UserListService();
-			ArrayList<UserBean> userList = userListService.getUserList();
-			request.setAttribute("userList", userList);
-			forward.setPath("/UserViewAction.me");
-		}
+			request.setCharacterEncoding("UTF-8");
+			UserBean modifyuser = new UserBean();
+			modifyuser.setUser_id(request.getParameter("user_id"));
+			modifyuser.setUser_email(request.getParameter("user_email"));
+			System.out.println("111"+request.getParameter("user_email"));
+			UserInfoModifyProService userInfoModifyProSvc = new UserInfoModifyProService();
+			boolean result = userInfoModifyProSvc.modifyUser(modifyuser);
+
+			if (!result) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('수정에 오류가 발생했습니다. 다시 작성하세요.');");
+				out.println("history.back();");
+				out.println("</script>");
+
+			} else {
+				forward = new ActionForward();
+				forward.setPath("userViewAction.me?id=" + modifyuser.getUser_id());
+
+				System.out.println("gggg" + forward.isRedirect());
+			}
 		return forward;
 	}
 }

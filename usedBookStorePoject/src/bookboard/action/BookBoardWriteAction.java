@@ -2,12 +2,14 @@ package bookboard.action;
 
 import java.io.PrintWriter;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import bookboard.svc.BookBoardWriteService;
 import vo.ActionForward;
+import vo.BoardBean;
 import vo.BookBoardBean;
 
 public class BookBoardWriteAction implements Action {
@@ -31,7 +33,7 @@ public class BookBoardWriteAction implements Action {
 			response.setContentType("text/html; Charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('µÓ∑œΩ«∆–')");
+			out.println("alert('Îì±Î°ùÏã´Ìå®')");
 			out.println("history.back();");
 			out.println("</script>");
 		} else {

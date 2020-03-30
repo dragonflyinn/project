@@ -21,19 +21,21 @@ public class UserLoginAction implements Action{
 	   		
 	   		UserLoginService userLoginService = new UserLoginService();
 	   		UserBean user = userLoginService.login(user_id,user_passwd);
+	   		System.out.println(user.getUser_grade());
 	   		ActionForward forward = null;
 	   		if(user!=null){
 	   	    forward = new ActionForward();
+	   	    session.setMaxInactiveInterval(60*60);
 	   		session.setAttribute("user",user);
 	   		forward.setRedirect(true);
-	   		forward.setPath("./UserListAction.me");
+	   		forward.setPath("sessionLogin.jsp"); //./는 현재 위치
 	   		}
 	   		else{
-	   			response.setContentType("text/html;charset=euc-kr");
+	   			response.setContentType("text/html;charset=UTF=8");
 		   		PrintWriter out=response.getWriter();
 		   		out.println("<script>");
 		   		out.println("alert('로그인 실패');");
-		   		out.println("location.href='./UserLogin.me';");
+		   		out.println("location.href='/userLogin.me';");
 		   		out.println("</script>");
 	   		}
 	   		return forward;

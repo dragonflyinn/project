@@ -6,62 +6,52 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원관리 시스템 관리자모드(회원 등급 부여 페이지)</title>
+<title>회원 정보 수정(일반 회원 모드)</title>
 
-	<script type="text/javascript">
-		function modifyboard() {
+<script type="text/javascript">
+	function modifyboard() {
 		modifyform.submit();
-		}
-	</script>
+	}
+</script>
 
-	<style type="text/css">
-	
-	#userInfoArea {
-		width: 400px;
-		margin: auto;
-		border: 1px solid gray;
-		}
+<style type="text/css">
+#userInfoArea {
+	width: 400px;
+	margin: auto;
+	border: 1px solid gray;
+}
 
-	table {
-		width: 380px;
-		margin: auto;
-		text-align: center;
-		}
-	</style>
+table {
+	width: 380px;
+	margin: auto;
+	text-align: center;
+}
+</style>
 </head>
 
-	<body>
+<body>
 	<section id="userInfoArea">
-	<form action="/UserInfoModifyProAction.me" method="post" name="modifyform">
-		<table>
-			<tr>
-				<td>아이디 :</td>
-				<td>${user.user_id }</td>
-			</tr>
-			<tr>
-				<td>비밀번호 :</td>
-				<td>${user.user_password}</td>
-			</tr>
-			<tr>
-				<td>이메일 주소 :</td>
-				<td>${user.user_email}</td>
-			</tr>
-			<tr>
-				<td>회원 등급 :</td>
-				<td>
-					<select>
-					<option value="A">최고 관리자 </option>
-					<option value="B">중간 관리자 </option>
-					<option value="C">일반 회원 </option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan=2><a href="UserListAction.me">리스트로 돌아가기</a>&nbsp;&nbsp;
-				<a href="javascript:modifyboard()">수정</a></td>
-			</tr>
-		</table>
-	</form>
+		<form
+			action="${pageContext.request.contextPath }/userInfoModifyProAction.me"
+			method="post" name="modifyform">
+			<input type="hidden" name="user_id" value="${user.user_id }">
+			<table>
+				<tr>
+					<td>아이디 :</td>
+					<td>${user.user_id }</td>
+				</tr>
+
+				<tr>
+					<td><label for="user_email">이메일 주소 : </label></td>
+					<td><input type="text" name="user_email" id="user_email" /></td>
+				</tr>
+
+				<tr>
+					<td colspan=2><a href="main.me">메인페이지</a>&nbsp;&nbsp; <a
+						href="javascript:modifyboard()">수정</a></td>
+				</tr>
+			</table>
+		</form>
 	</section>
 </body>
 </html>

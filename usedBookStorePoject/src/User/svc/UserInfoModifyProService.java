@@ -7,14 +7,14 @@ import dao.UserDAO;
 
 public class UserInfoModifyProService {
 
-	public boolean modifyUser(String user_id,String user_password) throws Exception {
+	public boolean modifyUser(UserBean modifyuser) throws Exception {
 		// TODO Auto-generated method stub
 		
 		boolean isModifySuccess = false;
 		Connection con = getConnection();
 		UserDAO userDAO = UserDAO.getInstance();
 		userDAO.setConnection(con);
-		int updateCount = userDAO.ModifyUserList(user_id,user_password);
+		int updateCount = userDAO.modifyUser(modifyuser);
 		
 		if(updateCount > 0){
 			commit(con);
@@ -23,7 +23,7 @@ public class UserInfoModifyProService {
 		else{
 			rollback(con);
 		}
-		
+		System.out.println(isModifySuccess);
 		close(con);
 		return isModifySuccess;
 		

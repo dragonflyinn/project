@@ -1,9 +1,12 @@
 package bookboard.svc;
 
 import static db.JdbcUtil.*;
+
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import dao.BookBoardDAO;
+import vo.BoardBean;
 import vo.BookBoardBean;
 
 public class BookBoardListService {

@@ -34,7 +34,7 @@ public class UserJoinAction implements Action{
 		   	}
 	   		else{
 	   	    forward = new ActionForward();
-	   		forward.setPath("/UserLogin.me");
+	   		forward.setPath("/userLogin.me");
 	   		}
 	   		return forward;
 	}
