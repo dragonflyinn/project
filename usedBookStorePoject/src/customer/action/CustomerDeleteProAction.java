@@ -48,7 +48,7 @@ public class CustomerDeleteProAction implements Action {
 			else{
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath("boardList.bo?page=" + nowPage);
+				forward.setPath("boardList.board?page=" + nowPage);
 			}
 			
 		}

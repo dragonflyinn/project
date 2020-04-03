@@ -60,7 +60,7 @@ table {
 
 	<section id="listForm">
 		<h2>
-			글 목록<a href="boardWriteForm.board">게시판글쓰기</a>
+			글 목록<a href="noticeWriteForm.notice">게시판글쓰기</a>
 		</h2>
 		<table>
 			<%
@@ -80,7 +80,10 @@ table {
 			%>
 			<tr>
 				<td><%=articleList.get(i).getPost_serial_number()%></td>
-				<td><%=articleList.get(i).getWriting_user_serial_number()%></td>
+				<td>
+				<a href="noticeDetail.notice?post_serial_number=<%=articleList.get(i).getPost_serial_number() %>&page=<%=nowPage %>">
+				<%=articleList.get(i).getPost_title() %></a></td>
+				<td><%=articleList.get(i).getUser_serial_number()%></td>
 				<td><%=articleList.get(i).getPost_date()%></td>
 				<td><%=articleList.get(i).getBoard_readcount()%></td>
 			</tr>
@@ -98,7 +101,7 @@ table {
 		<%
 			} else {
 		%>
-		<a href="boardList.board?page=<%=nowPage - 1%>">[이전]</a>&nbsp;
+		<a href="noticeList.notice?page=<%=nowPage - 1%>">[이전]</a>&nbsp;
 		<%
 			}
 		%>
@@ -111,7 +114,7 @@ table {
 		<%
 			} else {
 		%>
-		<a href="boardList.board?page=<%=a%>">[<%=a%>]
+		<a href="noticeList.notice?page=<%=a%>">[<%=a%>]
 		</a>&nbsp;
 		<%
 			}
@@ -127,7 +130,7 @@ table {
 		<%
 			} else {
 		%>
-		<a href="boardList.board?page=<%=nowPage + 1%>">[다음]</a>
+		<a href="noticeList.notice?page=<%=nowPage + 1%>">[다음]</a>
 		<%
 			}
 		%>

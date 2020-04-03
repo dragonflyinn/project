@@ -3,13 +3,13 @@ package bookboard.action;
 import java.io.PrintWriter;
 
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import bookboard.svc.BookBoardWriteService;
 import vo.ActionForward;
-import vo.BoardBean;
 import vo.BookBoardBean;
 
 public class BookBoardWriteAction implements Action {

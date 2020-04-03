@@ -66,7 +66,7 @@ public class CustomerDAO {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String board_list_sql = "SELECT * FROM customer_board ORDER BY post_serial_number DESC LIMIT ?,10";
+		String board_list_sql = "SELECT * FROM customer_board ORDER BY board_re_ref DESC, board_re_seq ASC LIMIT ?,10";
 		ArrayList<BoardBean> articleList = new ArrayList<BoardBean>();
 		BoardBean board = null;
 		int startrow = (page - 1) * 10; // 읽기 시작할 row 번호..
@@ -87,6 +87,9 @@ public class CustomerDAO {
 				board.setPost_content(rs.getString("post_content"));
 				board.setBoard_readcount(rs.getInt("post_readcount"));
 				board.setPost_date(rs.getDate("post_date"));
+				board.setBoard_re_ref(rs.getInt("board_re_ref"));
+				board.setBoard_re_lev(rs.getInt("board_re_lev"));
+				board.setBoard_re_seq(rs.getInt("board_re_seq"));
 				articleList.add(board);
 			}
 
@@ -122,6 +125,9 @@ public class CustomerDAO {
 				boardBean.setPost_content(rs.getString("post_content"));
 				boardBean.setBoard_readcount(rs.getInt("post_readcount"));
 				boardBean.setPost_date(rs.getDate("post_date"));
+				boardBean.setBoard_re_ref(rs.getInt("board_re_ref"));
+				boardBean.setBoard_re_lev(rs.getInt("board_re_lev"));
+				boardBean.setBoard_re_seq(rs.getInt("board_re_seq"));
 			}
 		} catch (Exception ex) {
 			System.out.println("getDetail 에러 : " + ex);
@@ -145,24 +151,27 @@ public class CustomerDAO {
 
 		try {
 
-			/*
-			 * pstmt=con.
-			 * prepareStatement("SELECT MAX(post_serial_number) FROM customer_board"); rs =
-			 * pstmt.executeQuery();
-			 * 
-			 * if(rs.next()) num =rs.getInt(1)+1; else num=1;
-			 */
-			sql = "INSERT INTO customer_board (post_title,writing_user_serial_number,post_content,post_date) VALUES(?,?,?,now())";
+			
+			 pstmt=con.prepareStatement("SELECT MAX(post_serial_number) FROM customer_board"); 
+			 rs=pstmt.executeQuery();
+			 if(rs.next()) num =rs.getInt(1)+1; 
+			 else num=1;
+			 
+			sql = "INSERT INTO customer_board (post_title,writing_user_serial_number,post_content,user_id,board_re_ref,board_re_lev,board_re_seq,board_readcount,post_date) VALUES(?,?,?,?,?,?,?,?,now())";
 
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, article.getPost_title());
 			pstmt.setInt(2, article.getWriting_user_serial_number());
 			pstmt.setString(3, article.getPost_content());
+			pstmt.setString(4, article.getUser_id());
 			System.out.println("제목" + article.getPost_title());
 			System.out.println("내용" + article.getPost_content());
 			System.out.println("아이디" + article.getUser_id());
-
+			pstmt.setInt(5, num);
+			pstmt.setInt(6, 0);
+			pstmt.setInt(7, 0);
+			pstmt.setInt(8, article.getBoard_readcount());
 			insertCount = pstmt.executeUpdate();
 
 		} catch (Exception ex) {

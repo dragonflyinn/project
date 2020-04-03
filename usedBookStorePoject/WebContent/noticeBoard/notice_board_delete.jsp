@@ -20,7 +20,7 @@
 </head>
 <body>
 <section id = "passForm">
-<form name="deleteForm" action="boardDeletePro.board?post_serial_number=<%=post_serial_number %>" 
+<form name="deleteForm" action="noticeDeletePro.notice?post_serial_number=<%=post_serial_number %>" 
 	method="post">
 <input type = "hidden" name = "page" value = "<%=nowPage %>"/>
 <table>

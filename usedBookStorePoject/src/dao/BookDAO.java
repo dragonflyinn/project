@@ -47,7 +47,7 @@ public class BookDAO {
 				bookBean.setBook_name(rs.getString("book_name"));
 			}
 		} catch (Exception ex) {
-			System.out.println(" ����: " + ex);
+			System.out.println("selectbook 에러: " + ex);
 		} finally {
 			close(pstmt);
 		}
@@ -72,7 +72,7 @@ public class BookDAO {
 				} while (rs.next());
 			}
 		} catch (Exception ex) {
-			System.out.println("getDeatilBook ����: " + ex);
+			System.out.println("getDeatilBook 에러: " + ex);
 		} finally {
 			close(pstmt);
 		}
@@ -93,7 +93,7 @@ public class BookDAO {
 				book.setBook_serial_number(rs.getInt("book_serial_number"));
 			}
 		} catch (Exception ex) {
-			System.out.println("getDeatilBook ����: " + ex);
+			System.out.println("getDeatilBook 에러: " + ex);
 		} finally {
 			close(pstmt);
 		}

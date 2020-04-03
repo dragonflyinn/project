@@ -2,21 +2,22 @@ package boardreply.svc;
 
 import java.sql.Connection;
 
+
 import dao.BoardReplyDAO;
-import vo.BoardReply;
+import vo.BoardBean;
 
 import static db.JdbcUtil.*;
 
 public class BoardReplyWriteService {
 
-	public boolean registArticle(BoardReply boardReply) {
+	public boolean registArticle(BoardBean boardBean) {
 		// TODO Auto-generated method stub
 
 		boolean isWriteSuccess = false;
 		Connection con = getConnection();
 		BoardReplyDAO boardReplyDAO = BoardReplyDAO.getInstance();
 		boardReplyDAO.setConnection(con);
-		int insertCount = boardReplyDAO.insertReplyArticle(boardReply);
+		int insertCount = boardReplyDAO.insertReplyArticle(boardBean);
 
 		if (insertCount > 0) {
 			

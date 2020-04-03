@@ -18,15 +18,14 @@ public class NoticeModifyProAction implements Action {
 			throws Exception{
 
 		HttpSession session=request.getSession();
-	 	UserBean loginUser = (UserBean)session.getAttribute("user_serial_numbber");
+	 	UserBean loginUser = (UserBean)session.getAttribute("user_serial_number");
    		String userGrade = loginUser.getUser_grade(); 
-   		ActionForward forward = null;
    		
+   		ActionForward forward = null;
 		boolean isModifySuccess = false;
 		int post_serial_number=Integer.parseInt(request.getParameter("post_serial_number"));
 		BoardBean article=new BoardBean();
 		NoticeModifyProService noticeModifyProService = new NoticeModifyProService();
-		//여기도 세션
 
 		if(!(userGrade.equals("A")||userGrade.equals("B"))){
    			response.setContentType("text/html;charset=UTF-8");
@@ -55,7 +54,7 @@ public class NoticeModifyProAction implements Action {
 			else{
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath("noticeViewAction.notice?post_serial_number="+article.getPost_serial_number()); 
+				forward.setPath("noticeDetail.notice?post_serial_number="+article.getPost_serial_number()); 
 			}
 
 		}

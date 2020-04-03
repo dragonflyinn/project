@@ -7,12 +7,14 @@
 
 <%
 	ArrayList<BoardBean> articleList = (ArrayList<BoardBean>) request.getAttribute("articleList");
+	Map<Integer, ArrayList<BoardBean>> replyMapList = (Map<Integer, ArrayList<BoardBean>>) request.getAttribute("replyMapList");
 	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
 	int nowPage = pageInfo.getPage();
 	int maxPage = pageInfo.getMaxPage();
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
+	
 %>
 
 <!DOCTYPE html>
@@ -117,8 +119,24 @@ table {
 					</tr>
 					
 					<%
+						ArrayList<BoardBean> list = replyMapList.get(articleList.get(i).getPost_serial_number());
+						for (int j = 0; j < list.size(); j++) {
+					%>
+					
+					<tr>
+						<td></td>
+						<td><a href="CustomerReplyDetail.board?page=<%=nowPage %>&post_serial_number=<%=list.get(j).getPost_serial_number()%>"><%=list.get(j).getPost_title()%></a></td>
+						<td><%=list.get(j).getUser_id() %></td>
+						<td><%=list.get(j).getPost_date()%></td>
+						<td><%=list.get(j).getBoard_readcount()%></td>
+					</tr>
+					<%
 						}
 					%>
+					<%
+						}
+					%>
+					
 				</table>
 		</section>
 

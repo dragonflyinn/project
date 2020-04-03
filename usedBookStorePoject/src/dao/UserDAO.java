@@ -237,7 +237,7 @@ public class UserDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, user_serial_number);
 			rs = pstmt.executeQuery();
-			System.out.println("userseira;" + user_serial_number);
+			System.out.println("userSerialNumber;" + user_serial_number);
 			if (rs.next())
 				user_id = rs.getString(1);
 			System.out.println("user_id" + user_id);

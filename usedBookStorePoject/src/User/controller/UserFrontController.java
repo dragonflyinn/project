@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import action.Action;
 import User.action.UserDeleteAction;
 import User.action.UserInfoModifyAction;
@@ -31,6 +33,12 @@ public class UserFrontController extends javax.servlet.http.HttpServlet {
 		if (command.equals("/userLogin.me")) {
 			forward = new ActionForward();
 			forward.setPath("/loginForm.jsp");
+		} else if (command.equals("/userLogout.me")) {
+			HttpSession session = request.getSession();
+			session.removeAttribute("user");
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("main.jsp");
 		} else if (command.equals("/userJoin.me")) {
 			forward = new ActionForward();
 			forward.setRedirect(false);

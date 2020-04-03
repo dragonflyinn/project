@@ -13,6 +13,7 @@ import customer.action.CustomerDetailAction;
 import customer.action.CustomerListAction;
 import customer.action.CustomerModifyFormAction;
 import customer.action.CustomerModifyProAction;
+import customer.action.CustomerReplyDetailAction;
 import customer.action.CustomerReplyFormAction;
 import customer.action.CustomerReplyProAction;
 import customer.action.CustomerWriteProAction;
@@ -86,6 +87,13 @@ public class CustomerFrontController extends javax.servlet.http.HttpServlet {
 			}
 		} else if (command.equals("/boardModifyPro.board")) {
 			action = new CustomerModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/CustomerReplyDetail.board")) {
+			action = new CustomerReplyDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

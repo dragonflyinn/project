@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객센터 글 상세보기</title>
+<title>고객센터 답변글 상세보기</title>
 <style type="text/css">
 #articleForm {
 	width: 500px;
@@ -47,7 +47,7 @@ h2 {
 
 <body>
 	<section id="articleForm">
-		<h2>글 내용 상세보기</h2>
+		<h2>답변 글 내용 상세보기</h2>
 		<section id="basicInfoArea">
 			제 목 :
 			<%=article.getPost_title()%>
@@ -65,8 +65,6 @@ h2 {
 	</section>
 	<section id="commandList">
 		<a
-			href="boardReplyForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
-			[답변] </a> <a
 			href="boardModifyForm.board?post_serial_number=<%=article.getPost_serial_number() %>">
 			[수정] </a> <a
 			href="boardDeleteForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">

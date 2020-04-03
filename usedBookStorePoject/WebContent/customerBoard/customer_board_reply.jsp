@@ -3,6 +3,7 @@
 <%
 	BoardBean article=(BoardBean)request.getAttribute("article");
     String nowPage = (String)request.getAttribute("page");
+   String userId = (String)request.getAttribute("writingUserID");
     System.out.println("리플라이 아티클"+article);
 %>
 <!DOCTYPE html>
@@ -53,8 +54,8 @@ table {
 		<form action="boardReplyPro.board" method="post" name="boardform">
 			<input type="hidden" name="page" value="<%=nowPage %>" /> 
 			<input type="hidden" name="post_serial_number" value="<%=article.getPost_serial_number() %>">
-			<input type="hidden" name="board_re_ref" value="<%=article.getBoard_re_ref() %>"> 
-			<input type="hidden" name="board_re_lev" value="<%=article.getBoard_re_lev() %>"> 
+			<input type="hidden" name="board_re_ref" value="<%=article.getBoard_re_ref() %>">
+			<input type="hidden" name="board_re_lev" value="<%=article.getBoard_re_lev() %>">
 			<input type="hidden" name="board_re_seq" value="<%=article.getBoard_re_seq() %>">
 			<table>
 				<tr>
@@ -62,11 +63,8 @@ table {
 					<td class="td_right"><input name="post_title" type="text"
 						id="post_title" /></td>
 				</tr>
-				<tr>
-					<td class="td_left"><label for="user_id">글쓴이</label></td>
-					<td class="td_right"><input name="post_title" type="text"
-						id="user_id" /></td>
-				</tr>
+					<td class="td_left"><label for="post_title">글쓴이</label></td>
+					<td class="td_right">${user.user_id } </td>
 				<tr>
 					<td class="td_left"><label for="post_content">내 용</label></td>
 					<td><textarea id="post_content" name="post_content"

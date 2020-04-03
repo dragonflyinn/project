@@ -3,6 +3,7 @@ package notice.controller;
 import java.io.IOException;
 
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import notice.action.NoticeDeleteProAction;
+import notice.action.NoticeDetailAction;
 import notice.action.NoticeListAction;
 import notice.action.NoticeModifyFormAction;
 import notice.action.NoticeModifyProAction;
@@ -28,7 +30,7 @@ public class NoticeController extends javax.servlet.http.HttpServlet {
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-		System.out.println(command);
+		
 		if (command.equals("/noticeWriteForm.notice")) {
 			forward = new ActionForward();
 			forward.setPath("/noticeBoard/notice_board_write.jsp");
@@ -46,8 +48,8 @@ public class NoticeController extends javax.servlet.http.HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/noticeView.notice")) {
-			action = new NoticeViewAction();
+		} else if (command.equals("/noticeDetail.notice")) {
+			action = new NoticeDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -73,7 +75,7 @@ public class NoticeController extends javax.servlet.http.HttpServlet {
 			int post_serial_number = Integer.parseInt(request.getParameter("post_serial_number"));
 			request.setAttribute("post_serial_number", post_serial_number);
 			forward = new ActionForward();
-			forward.setPath("/noticeDeleteProAction");
+			forward.setPath("/noticeBoard/notice_board_delete.jsp");
 		} else if (command.equals("/noticeDeletePro.notice")) {
 			action = new NoticeDeleteProAction();
 			try {

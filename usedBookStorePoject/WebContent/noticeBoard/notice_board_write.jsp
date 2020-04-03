@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객센터 게시판</title>
+<title>공지게시판</title>
 <style type="text/css">
 #registForm {
 	width: 500px;
@@ -42,17 +42,16 @@ table {
 
 	<section id="writeForm">
 		<h2>공지글 등록</h2>
-		<form action="boardWritePro.board" method="post"
-			enctype="multipart/form-data" name="boardform">
+		<form action="noticeWritePro.notice" method="post" name="boardform">
 			<table>
 				<tr>
-					<td class="td_left"><label for="board_subject">제 목</label></td>
-					<td class="td_right"><input name="board_subject" type="text"
-						id="board_subject" required="required" /></td>
+					<td class="td_left"><label for="post_title">제 목</label></td>
+					<td class="td_right"><input name="post_title" type="text"
+						id="post_title" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="board_content">내 용</label></td>
-					<td><textarea id="board_content" name="board_content"
+					<td class="td_left"><label for="post_content">내 용</label></td>
+					<td><textarea id="post_content" name="post_content"
 							cols="40" rows="15" required="required"></textarea></td>
 				</tr>
 			</table>
@@ -62,6 +61,5 @@ table {
 			</section>
 		</form>
 	</section>
-	<!-- 게시판 등록 -->
 </body>
 </html>

@@ -14,6 +14,7 @@ public class NoticeDeleteProAction implements Action {
 
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) 
 			throws Exception{	 
+		
 		HttpSession session = request.getSession();
 		String user_grade = (String) session.getAttribute("user_grade");
 		String user = (String) session.getAttribute("user");
@@ -48,7 +49,7 @@ public class NoticeDeleteProAction implements Action {
 			else{
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath("noticeListAction.notice?page=" + nowPage);
+				forward.setPath("noticeList.notice?page=" + nowPage);
 			}
 			
 		}

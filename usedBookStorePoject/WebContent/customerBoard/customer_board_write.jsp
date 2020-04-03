@@ -42,8 +42,7 @@ table {
 
 	<section id="writeForm">
 		<h2>게시판글등록</h2>
-		<form action="boardWritePro.board" method="post"
-			enctype="multipart/form-data" name="boardform">
+		<form action="boardWritePro.board" method="post" name="boardform">
 			<table>
 				<tr>
 					<td class="td_left"><label for="board_subject">제 목</label></td>

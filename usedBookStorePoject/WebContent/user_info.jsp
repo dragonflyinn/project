@@ -1,6 +1,7 @@
 <%@page import="vo.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="checkUser.jsp"/>
 <%
 	UserBean user=(UserBean)session.getAttribute("user");
 	if(user.getUser_id()!=null){

@@ -47,40 +47,32 @@
 
 <section id = "writeForm">
 <h2>게시판글수정</h2>
-<form action="boardModifyPro.board" method="post" name = "modifyform"
+<form action="noticeModifyPro.notice" method="post" name = "modifyform"
 >
 <input type = "hidden" name = "post_serial_number" value = "<%=article.getPost_serial_number()%>"/>
 <table>
 	<tr>
 		<td class="td_left">
-			<label for = "board_name">글쓴이</label>
+			<label for = "user_serial_number">글쓴이</label>
 		</td>
 		<td class="td_right">
-			<input type = "text" name="board_name" id = "board_name" value = "<%=article.getWriting_user_serial_number()%>"/>
+			<input type = "text" name="user_serial_number" id = "user_serial_number" value = "<%=article.getUser_serial_number()%>"/>
 		</td>
 	</tr>
 	<tr>
 		<td class="td_left">
-			<label for = "board_pass">비밀번호</label>
+			<label for = "post_title">제 목</label>
 		</td>
 		<td class="td_right">
-			<input name="board_pass" type="password" id = "board_pass"/>
+			<input name="post_title" type="text" id = "post_title" value = "<%=article.getPost_title()%>"/>
 		</td>
 	</tr>
 	<tr>
 		<td class="td_left">
-			<label for = "board_subject">제 목</label>
-		</td>
-		<td class="td_right">
-			<input name="board_subject" type="text" id = "board_subject" value = "<%=article.getPost_title()%>"/>
-		</td>
-	</tr>
-	<tr>
-		<td class="td_left">
-			<label for = "board_content">내 용</label>
+			<label for = "post_content">내 용</label>
 		</td>
 		<td>
-			<textarea id = "board_content" name="board_content" cols="40" rows="15"><%=article.getPost_content()%></textarea>
+			<textarea id = "post_content" name="post_content" cols="40" rows="15"><%=article.getPost_content()%></textarea>
 		</td>
 	</tr>
 </table>

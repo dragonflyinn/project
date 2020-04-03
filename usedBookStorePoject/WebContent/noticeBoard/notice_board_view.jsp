@@ -53,17 +53,15 @@ h2 {
 			<%=article.getPost_title()%>
 		</section>
 		<section id="articleContentArea">
+			내 용 : 
 			<%=article.getPost_content() %>
 		</section>
 	</section>
 	<section id="commandList">
-		<a
-			href="boardReplyForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
-			[답변] </a> <a
-			href="boardModifyForm.board?post_serial_number=<%=article.getPost_serial_number() %>">
-			[수정] </a> <a
-			href="boardDeleteForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
-			[삭제] </a> <a href="boardList.board?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
+		<a href="noticeModifyForm.notice?post_serial_number=<%=article.getPost_serial_number() %>"> [수정] </a> 
+		<a href="noticeDeleteForm.notice?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
+		[삭제] </a> 
+		<a href="noticeList.notice?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
 	</section>
 </body>
 </html>

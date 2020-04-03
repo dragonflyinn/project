@@ -15,14 +15,16 @@ import notice.svc.NoticeWriteProService;
 public class NoticeWriteProAction implements Action {
 
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		
 		HttpSession session = request.getSession();
-		BoardBean user = (BoardBean) session.getAttribute("writing_user_serial_number");
+		BoardBean user = (BoardBean) session.getAttribute("user_serial_number");
 		
 		ActionForward forward=null;
 		BoardBean boardBean = null;
 		
 		boardBean = new BoardBean();
 		boardBean.setPost_title(request.getParameter("post_title"));
+		System.out.println("노티스 액션"+request.getParameter("post_title"));
 		boardBean.setPost_content(request.getParameter("post_content"));
 		
 		NoticeWriteProService noticeWriteProService = new NoticeWriteProService();
@@ -39,7 +41,7 @@ public class NoticeWriteProAction implements Action {
 		else{
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("noticeListAction.notice");
+			forward.setPath("noticeList.notice");
 		}
 
 		return forward;

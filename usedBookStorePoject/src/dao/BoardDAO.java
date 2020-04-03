@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.sql.DataSource;
 import vo.BoardBean;
+import vo.UserBean;
 
 public class BoardDAO {
 
@@ -78,6 +79,7 @@ public class BoardDAO {
 
 			while(rs.next()){
 				board = new BoardBean();
+				board.setUser_serial_number(rs.getInt("user_serial_number"));
 				board.setPost_title(rs.getString("post_title"));
 				board.setPost_content(rs.getString("post_content"));
 				board.setBoard_readcount(rs.getInt("board_readcount"));
@@ -111,6 +113,7 @@ public class BoardDAO {
 
 			if(rs.next()){
 				boardBean = new BoardBean();
+				boardBean.setUser_serial_number(rs.getInt("user_serial_number"));
 				boardBean.setPost_title(rs.getString("post_title"));
 				boardBean.setPost_content(rs.getString("post_content"));
 				boardBean.setBoard_readcount(rs.getInt("board_readcount"));
@@ -138,24 +141,14 @@ public class BoardDAO {
 		int insertCount=0;
 
 		try{
-			pstmt=con.prepareStatement("SELECT MAX(post_serial_number) FROM board");
-			rs = pstmt.executeQuery();
-
-			if(rs.next())
-				num =rs.getInt(1)+1;
-			else
-				num=1;
-			
-			sql="INSERT INTO board (user_serial_number,post_title,post_content";
+			sql="INSERT INTO board (user_serial_number,post_title,post_content,";
 			sql+="board_readcount,post_date) VALUES(?,?,?,?,now())";
 
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, article.getUser_serial_number());
 			pstmt.setString(2, article.getPost_title());
 			pstmt.setString(3, article.getPost_content());
-			pstmt.setInt(4, num);
-			pstmt.setInt(5, 0);
-
+			pstmt.setInt(4, 0);
 			insertCount=pstmt.executeUpdate();
 
 		}catch(Exception ex){
@@ -236,6 +229,30 @@ public class BoardDAO {
 
 	}
 
-	//글쓴이인지 확인. 세션이 있으니까 괜찮다. 비로그인 게시판일 경우 확인이 필요하니까 isArticleBoardWriter (int porst_serial_number,string pass)부분이 필요하다.
-	
+	public boolean isArticleBoardWriter(int post_serial_number, UserBean loginuser) {
+		// TODO Auto-generated method stub
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String board_sql="SELECT * FROM board WHERE post_serial_number=?";
+		boolean isWriter = false;
+		
+		try {
+			pstmt=con.prepareStatement(board_sql);
+			pstmt.setInt(1,post_serial_number);
+			rs=pstmt.executeQuery();
+			rs.next();
+			
+			if(loginuser.equals(rs.getString("loginuser"))) {
+				isWriter = true;
+			}
+		}catch(SQLException ex) {
+			System.out.println("isBoardWriter 에러: "+ex);
+		}
+		finally {
+			close(pstmt);
+		}
+		return isWriter;
+	}
 }
+	//글쓴이인지 확인. 세션이 있으니까 괜찮다. 비로그인 상태에서 적는 게시판일 경우 확인이 필요하니까 isArticleBoardWriter(int porst_serial_number,string pass)부분이 필요하다.
