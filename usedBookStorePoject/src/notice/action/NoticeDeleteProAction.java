@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import notice.svc.NoticeDeleteProService;
 import vo.ActionForward;
+import vo.UserBean;
 
 public class NoticeDeleteProAction implements Action {
 
@@ -17,23 +18,14 @@ public class NoticeDeleteProAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String user_grade = (String) session.getAttribute("user_grade");
-		String user = (String) session.getAttribute("user");
+		UserBean user = (UserBean) session.getAttribute("user");
 		ActionForward forward = null;
 		
 		int post_serial_number=Integer.parseInt(request.getParameter("post_serial_number"));
 		String nowPage = request.getParameter("page");
 		NoticeDeleteProService noticeDeleteProService = new NoticeDeleteProService();
 
-		if (!(user_grade.equals("A") || user_grade.equals("B"))) {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('삭제할 권한이 없습니다.');");
-			out.println("history.back();");
-			out.println("</script>");
-		}
-
-		else{
+		
 			
 			boolean isDeleteSuccess = noticeDeleteProService.removeArticle(post_serial_number);
 
@@ -51,11 +43,9 @@ public class NoticeDeleteProAction implements Action {
 				forward.setRedirect(true);
 				forward.setPath("noticeList.notice?page=" + nowPage);
 			}
-			
+
+			return forward;
 		}
 
 
-		return forward;
 	}
-
-}

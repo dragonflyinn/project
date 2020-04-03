@@ -83,7 +83,7 @@ table {
 				<td>
 				<a href="noticeDetail.notice?post_serial_number=<%=articleList.get(i).getPost_serial_number() %>&page=<%=nowPage %>">
 				<%=articleList.get(i).getPost_title() %></a></td>
-				<td><%=articleList.get(i).getUser_serial_number()%></td>
+				<td><%=articleList.get(i).getUser_id()%></td>
 				<td><%=articleList.get(i).getPost_date()%></td>
 				<td><%=articleList.get(i).getBoard_readcount()%></td>
 			</tr>

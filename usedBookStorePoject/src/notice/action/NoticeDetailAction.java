@@ -19,7 +19,7 @@ public class NoticeDetailAction implements Action {
 		ActionForward forward = new ActionForward();
 		request.setAttribute("page", page);
 		request.setAttribute("article", article);
-		forward.setPath("/noticeBoard/notie_board_view.jsp");
+		forward.setPath("/noticeBoard/notice_board_view.jsp");
 		return forward;
 	}
 

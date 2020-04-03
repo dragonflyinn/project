@@ -20,8 +20,8 @@ public class CustomerDetailAction implements Action {
 		
 		CustomerDetailService boardDetailService = new CustomerDetailService();
 		BoardBean article = boardDetailService.getArticle(post_serial_number);
-		getId getIdService = new getId();
 		
+		getId getIdService = new getId();
 		String user_id = getIdService.getIdBySerial(article.getWriting_user_serial_number());
 		
 		ActionForward forward = new ActionForward();

@@ -1,8 +1,11 @@
 package notice.action;
 
 import java.util.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Common.getId;
 
 import action.Action;
 import notice.svc.NoticeListService;
@@ -23,6 +26,7 @@ import vo.PageInfo;
 		}
 		
 		NoticeListService noticeListService = new NoticeListService();
+		
 		int listCount=noticeListService.getListCount(); 
 		articleList=noticeListService.getArticleList(page,limit); //매개변수 하나 더 추가 reply
    		int maxPage=(int)((double)listCount/limit+0.95); 

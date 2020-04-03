@@ -47,17 +47,14 @@
 
 <section id = "writeForm">
 <h2>게시판글수정</h2>
-<form action="noticeModifyPro.notice" method="post" name = "modifyform"
->
+<form action="noticeModifyPro.notice" method="post" name = "modifyform">
 <input type = "hidden" name = "post_serial_number" value = "<%=article.getPost_serial_number()%>"/>
 <table>
 	<tr>
 		<td class="td_left">
-			<label for = "user_serial_number">글쓴이</label>
+			<label for = "user_id">글쓴이</label>
 		</td>
-		<td class="td_right">
-			<input type = "text" name="user_serial_number" id = "user_serial_number" value = "<%=article.getUser_serial_number()%>"/>
-		</td>
+		<td class="td_right"> ${user.user_id } </td>
 	</tr>
 	<tr>
 		<td class="td_left">

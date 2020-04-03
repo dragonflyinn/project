@@ -18,7 +18,7 @@ public class NoticeModifyProAction implements Action {
 			throws Exception{
 
 		HttpSession session=request.getSession();
-	 	UserBean loginUser = (UserBean)session.getAttribute("user_serial_number");
+	 	UserBean loginUser = (UserBean)session.getAttribute("user");
    		String userGrade = loginUser.getUser_grade(); 
    		
    		ActionForward forward = null;

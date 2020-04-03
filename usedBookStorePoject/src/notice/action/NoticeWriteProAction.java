@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import vo.ActionForward;
 import vo.BoardBean;
-
+import vo.UserBean;
 import action.Action;
 import notice.svc.NoticeWriteProService;
 
@@ -17,12 +17,14 @@ public class NoticeWriteProAction implements Action {
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
 		HttpSession session = request.getSession();
-		BoardBean user = (BoardBean) session.getAttribute("user_serial_number");
+		UserBean user = (UserBean) session.getAttribute("user");
 		
 		ActionForward forward=null;
 		BoardBean boardBean = null;
 		
 		boardBean = new BoardBean();
+		int user_serial_number = user.getUser_serial_number();
+		boardBean.setUser_serial_number(user_serial_number);
 		boardBean.setPost_title(request.getParameter("post_title"));
 		System.out.println("노티스 액션"+request.getParameter("post_title"));
 		boardBean.setPost_content(request.getParameter("post_content"));

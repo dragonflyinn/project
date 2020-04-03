@@ -59,7 +59,7 @@ h2 {
 	</section>
 	<section id="commandList">
 		<a href="noticeModifyForm.notice?post_serial_number=<%=article.getPost_serial_number() %>"> [수정] </a> 
-		<a href="noticeDeleteForm.notice?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
+		<a href="noticeDeletePro.notice?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
 		[삭제] </a> 
 		<a href="noticeList.notice?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
 	</section>

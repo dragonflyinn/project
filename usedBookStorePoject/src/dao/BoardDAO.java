@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.sql.DataSource;
+
+import Common.getId;
 import vo.BoardBean;
 import vo.UserBean;
 
@@ -79,7 +81,12 @@ public class BoardDAO {
 
 			while(rs.next()){
 				board = new BoardBean();
+				
+				board.setPost_serial_number(rs.getInt("post_serial_number"));
 				board.setUser_serial_number(rs.getInt("user_serial_number"));
+				getId getIdService = new getId();
+				String user_id = getIdService.getIdBySerial(board.getUser_serial_number());
+				board.setUser_id(user_id);
 				board.setPost_title(rs.getString("post_title"));
 				board.setPost_content(rs.getString("post_content"));
 				board.setBoard_readcount(rs.getInt("board_readcount"));
@@ -107,18 +114,18 @@ public class BoardDAO {
 
 		try{
 			pstmt = con.prepareStatement(
-					"SELECT * FORM board WHERE post_serial_number = ?");
+					"SELECT * FROM board WHERE post_serial_number = ?");
 			pstmt.setInt(1, post_serial_number);
 			rs= pstmt.executeQuery();
 
 			if(rs.next()){
 				boardBean = new BoardBean();
+				boardBean.setPost_serial_number(rs.getInt("post_serial_number"));
 				boardBean.setUser_serial_number(rs.getInt("user_serial_number"));
 				boardBean.setPost_title(rs.getString("post_title"));
 				boardBean.setPost_content(rs.getString("post_content"));
 				boardBean.setBoard_readcount(rs.getInt("board_readcount"));
 				boardBean.setPost_date(rs.getDate("post_date"));
-				boardBean.setWriting_user_serial_number(rs.getInt("writing_user_serial_number"));
 			}
 		}catch(Exception ex){
 			System.out.println("getDetail 에러 : " + ex);

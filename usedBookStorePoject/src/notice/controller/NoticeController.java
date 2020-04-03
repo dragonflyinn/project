@@ -84,7 +84,7 @@ public class NoticeController extends javax.servlet.http.HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+System.out.println("에러잡자"+forward.getPath());
 		if (forward != null) {
 
 			if (forward.isRedirect()) {
