@@ -1,6 +1,7 @@
 <%@page import="vo.BoardBean"%>
+<%@page import="vo.UserBean"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	BoardBean article = (BoardBean)request.getAttribute("article");
     String nowPage = (String)request.getAttribute("page");
@@ -58,9 +59,11 @@ h2 {
 		</section>
 	</section>
 	<section id="commandList">
+	<c:if test="${user.user_grade == 'A'|| user.user_grade == 'B' }">
 		<a href="noticeModifyForm.notice?post_serial_number=<%=article.getPost_serial_number() %>"> [수정] </a> 
 		<a href="noticeDeletePro.notice?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
 		[삭제] </a> 
+	</c:if>
 		<a href="noticeList.notice?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
 	</section>
 </body>

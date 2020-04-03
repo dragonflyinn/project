@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 	ArrayList<BoardBean> articleList = (ArrayList<BoardBean>) request.getAttribute("articleList");
@@ -59,9 +60,17 @@ table {
 	<!-- 게시판 리스트 -->
 
 	<section id="listForm">
+	<c:choose>
+	<c:when test="${user.user_grade == 'A'|| user.user_grade == 'B' }">
 		<h2>
-			글 목록<a href="noticeWriteForm.notice">게시판글쓰기</a>
+			공지글 목록<a href="noticeWriteForm.notice">게시판글쓰기</a>
 		</h2>
+	</c:when>
+	<c:otherwise>
+		<h2>공지글 목록</h2>
+	</c:otherwise>
+	</c:choose>
+	
 		<table>
 			<%
 				if (articleList != null && listCount > 0) {
