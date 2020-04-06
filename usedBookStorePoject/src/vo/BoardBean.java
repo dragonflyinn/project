@@ -12,12 +12,11 @@ public class BoardBean {
 	private String post_title;
 	private String post_content;
 	private Date post_date;
-	private int board_readcount;
+	private int post_readcount;
 	private int board_re_ref;
 	private int board_re_lev;
 	private int board_re_seq;
 	private String post_group;
-	
 	public int getPost_serial_number() {
 		return post_serial_number;
 	}
@@ -66,11 +65,11 @@ public class BoardBean {
 	public void setPost_date(Date post_date) {
 		this.post_date = post_date;
 	}
-	public int getBoard_readcount() {
-		return board_readcount;
+	public int getPost_readcount() {
+		return post_readcount;
 	}
-	public void setBoard_readcount(int board_readcount) {
-		this.board_readcount = board_readcount;
+	public void setPost_readcount(int post_readcount) {
+		this.post_readcount = post_readcount;
 	}
 	public int getBoard_re_ref() {
 		return board_re_ref;

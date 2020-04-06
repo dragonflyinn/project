@@ -94,7 +94,7 @@ table {
 				<%=articleList.get(i).getPost_title() %></a></td>
 				<td><%=articleList.get(i).getUser_id()%></td>
 				<td><%=articleList.get(i).getPost_date()%></td>
-				<td><%=articleList.get(i).getBoard_readcount()%></td>
+				<td><%=articleList.get(i).getPost_readcount()%></td>
 			</tr>
 			<%
 				}

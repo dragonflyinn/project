@@ -7,7 +7,6 @@
 
 <%
 	ArrayList<BoardBean> articleList = (ArrayList<BoardBean>) request.getAttribute("articleList");
-	Map<Integer, ArrayList<BoardBean>> replyMapList = (Map<Integer, ArrayList<BoardBean>>) request.getAttribute("replyMapList");
 	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
 	int nowPage = pageInfo.getPage();
@@ -112,30 +111,19 @@ table {
 					
 					<tr>
 						<td><%=articleList.get(i).getPost_serial_number()%></td>
-						<td><a href="boardDetail.board?page=<%=nowPage %>&post_serial_number=<%=articleList.get(i).getPost_serial_number()%>"><%=articleList.get(i).getPost_title()%></a></td>
+						<td>
+						<% if(articleList.get(i).getBoard_re_lev() !=0) { %>
+						<% for(int a=0; a<=articleList.get(i).getBoard_re_lev()*2;a++) { %> &nbsp;
+						<% } %> ▶
+						<%} %>
+						<a href="boardDetail.board?post_serial_number=<%=articleList.get(i).getPost_serial_number()%>&page=<%=nowPage%>">
+						<%=articleList.get(i).getPost_title()%></a></td>
 						<td><%=articleList.get(i).getUser_id() %></td>
 						<td><%=articleList.get(i).getPost_date()%></td>
-						<td><%=articleList.get(i).getBoard_readcount()%></td>
+						<td><%=articleList.get(i).getPost_readcount()%></td>
 					</tr>
 					
-					<%
-						ArrayList<BoardBean> list = replyMapList.get(articleList.get(i).getPost_serial_number());
-						for (int j = 0; j < list.size(); j++) {
-					%>
-					
-					<tr>
-						<td></td>
-						<td><a href="CustomerReplyDetail.board?page=<%=nowPage %>&post_serial_number=<%=list.get(j).getPost_serial_number()%>"><%=list.get(j).getPost_title()%></a></td>
-						<td><%=list.get(j).getUser_id() %></td>
-						<td><%=list.get(j).getPost_date()%></td>
-						<td><%=list.get(j).getBoard_readcount()%></td>
-					</tr>
-					<%
-						}
-					%>
-					<%
-						}
-					%>
+					<%} %>
 					
 				</table>
 		</section>
@@ -163,32 +151,19 @@ table {
 			%>
 			<a href="boardList.board?page=<%=a%>">[<%=a%>]
 			</a>&nbsp;
-			<%
-				}
-			%>
-			<%
-				}
-			%>
+			<%}%>
+			<%}%>
 
-			<%
-				if (nowPage >= maxPage) {
-			%>
+			<% if (nowPage >= maxPage) { %>
 			[다음]
-			<%
-				} else {
-			%>
+			<% } else { %>
 			<a href="boardList.board?page=<%=nowPage + 1%>">[다음]</a>
-			<%
-				}
-			%>
+			<% } %>
 		</section>
-		<%
-			} else {
-		%>
+		
+		<% } else { %>
 		<section id="emptyArea">등록된 글이 없습니다.</section>
-		<%
-			}
-		%>
+		<% } %>
 
 	<form action="boardWritePro.board" method="post" name="boardform">
 		<section id="boardForm">

@@ -3,7 +3,8 @@
 <%
 
 	BoardBean article = (BoardBean)request.getAttribute("article");
-System.out.println(article);
+	String nowPage = (String)request.getAttribute("page");
+	System.out.println(article);
 %>
 
 <!DOCTYPE html>
@@ -49,8 +50,8 @@ System.out.println(article);
 
 <section id = "writeForm">
 <h2>게시판글수정</h2>
-<form action="boardModifyPro.board" method="post" name = "modifyform"
->
+<form action="boardModifyPro.board" method="post" name = "modifyform">
+<input type = "hidden" name = "page" value = "<%=nowPage %>"/>
 <input type = "hidden" name = "post_serial_number" value = "<%=article.getPost_serial_number()%>"/>
 <table>
 	<tr>
@@ -58,7 +59,7 @@ System.out.println(article);
 			<label for = "board_name">글쓴이</label>
 		</td>
 		<td class="td_right">
-			<input type = "text" name="user_id" id = "user_id" value = "<%=article.getWriting_user_serial_number()%>"/>
+			 ${user.user_id }
 		</td>
 	</tr>
 	<tr>

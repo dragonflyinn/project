@@ -89,7 +89,7 @@ public class BoardDAO {
 				board.setUser_id(user_id);
 				board.setPost_title(rs.getString("post_title"));
 				board.setPost_content(rs.getString("post_content"));
-				board.setBoard_readcount(rs.getInt("board_readcount"));
+				board.setPost_readcount(rs.getInt("post_readcount"));
 				board.setPost_date(rs.getDate("post_date"));
 				articleList.add(board);
 			}
@@ -121,10 +121,15 @@ public class BoardDAO {
 			if(rs.next()){
 				boardBean = new BoardBean();
 				boardBean.setPost_serial_number(rs.getInt("post_serial_number"));
+				System.out.println(rs.getInt("post_serial_number"));
 				boardBean.setUser_serial_number(rs.getInt("user_serial_number"));
+				System.out.println(rs.getInt("user_serial_number"));
 				boardBean.setPost_title(rs.getString("post_title"));
+				System.out.println(rs.getString("post_title"));
 				boardBean.setPost_content(rs.getString("post_content"));
-				boardBean.setBoard_readcount(rs.getInt("board_readcount"));
+				System.out.println(rs.getString("post_content"));
+				boardBean.setPost_readcount(rs.getInt("post_readcount"));
+				System.out.println(rs.getInt("post_readcount"));
 				boardBean.setPost_date(rs.getDate("post_date"));
 			}
 		}catch(Exception ex){
@@ -149,7 +154,7 @@ public class BoardDAO {
 
 		try{
 			sql="INSERT INTO board (user_serial_number,post_title,post_content,";
-			sql+="board_readcount,post_date) VALUES(?,?,?,?,now())";
+			sql+="post_readcount,post_date) VALUES(?,?,?,?,now())";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, article.getUser_serial_number());
@@ -218,8 +223,8 @@ public class BoardDAO {
 
 		PreparedStatement pstmt = null;
 		int updateCount = 0;
-		String sql="UPDATE board SET board_readcount = "+
-				"board_readcount+1 WHERE post_serial_number = "+post_serial_number;
+		String sql="UPDATE board SET post_readcount = "+
+				"post_readcount+1 WHERE post_serial_number = "+post_serial_number;
 
 		try{
 			pstmt=con.prepareStatement(sql);

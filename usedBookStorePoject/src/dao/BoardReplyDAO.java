@@ -51,7 +51,7 @@ public class BoardReplyDAO {
 				boardBean.setUser_id(rs.getString("user_id"));
 				boardBean.setPost_title(rs.getString("post_title"));
 				boardBean.setPost_content(rs.getString("post_content"));
-				boardBean.setBoard_readcount(rs.getInt("post_readcount"));
+				boardBean.setPost_readcount(rs.getInt("post_readcount"));
 				boardBean.setPost_date(rs.getDate("post_date"));
 				boardBean.setBoard_re_ref(rs.getInt("board_re_Ref"));
 				boardBean.setBoard_re_lev(rs.getInt("board_re_lev"));
@@ -126,6 +126,7 @@ public class BoardReplyDAO {
 			if(rs.next()) num = rs.getInt(1)+1;
 			else num = 1;
 			sql = "UPDATE customer_board SET board_re_seq = board_re_seq+1 WHERE board_re_ref=? and board_re_seq>?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, re_ref);
 			pstmt.setInt(2, re_seq);
 			int updateCount = pstmt.executeUpdate();
@@ -137,11 +138,10 @@ public class BoardReplyDAO {
 			re_seq = re_seq+1;
 			re_lev = re_lev+1;
 			
-			sql = "INSERT INTO customer_board (user_serial_number,post_title,post_content,";
-			sql += "board_re_ref,board_re_lev,board_re_seq,post_readcount,post_date) VALUES(?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO customer_board (writing_user_serial_number,post_title,post_content,board_re_ref,board_re_lev,board_re_seq,post_readcount,post_date) VALUES(?,?,?,?,?,?,?,now())";
 			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, article.getUser_serial_number());
+			pstmt.setInt(1, article.getWriting_user_serial_number());
 			pstmt.setString(2, article.getPost_title());
 			pstmt.setString(3, article.getPost_content());
 			pstmt.setInt(4, re_ref);
@@ -258,7 +258,7 @@ public class BoardReplyDAO {
 				boardBean.setPost_title(rs.getString("post_title"));
 				System.out.println(rs.getString("post_title"));
 				boardBean.setPost_content(rs.getString("post_content"));
-				boardBean.setBoard_readcount(rs.getInt("post_readcount"));
+				boardBean.setPost_readcount(rs.getInt("post_readcount"));
 				boardBean.setPost_date(rs.getDate("post_date"));
 				replyList.add(boardBean);
 			}

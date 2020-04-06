@@ -18,6 +18,7 @@ int endPage = pageInfo.getEndPage();
 <head>
 <meta charset="UTF-8" />
 <title>고객센터 게시판</title>
+
 <style type="text/css">
 #registForm {
 	width: 500px;
@@ -58,7 +59,7 @@ table {
 	<!-- 게시판 리스트 -->
 	<section id="listForm">
 		<h2>
-			글 목록<a href="boardWriteForm.board">게시판글쓰기</a>
+			문의글 목록<a href="boardWriteForm.board">게시판글쓰기</a>
 		</h2>
 		<table>
 			<%
@@ -82,17 +83,13 @@ table {
 				<td>
 				<% if(articleList.get(i).getBoard_re_lev() !=0) { %>
 				<% for(int a=0; a<=articleList.get(i).getBoard_re_lev()*2;a++) { %> &nbsp;
-				<%} %> ▶
+				<% } %> ▶
 				<% } else { %> ▶ <%} %>
 				<a href="boardDetail.board?post_serial_number=<%=articleList.get(i).getPost_serial_number() %>&page=<%=nowPage %>">
-				<%=articleList.get(i).getPost_title() %>
-				</a> 
-				</td>
-			
-				<td><%=articleList.get(i).getPost_title()%></td>
+				<%=articleList.get(i).getPost_title() %></a></td>
 				<td><%=articleList.get(i).getWriting_user_serial_number()%></td>
 				<td><%=articleList.get(i).getPost_date()%></td>
-				<td><%=articleList.get(i).getBoard_readcount()%></td>
+				<td><%=articleList.get(i).getPost_readcount()%></td>
 				
 			</tr>
 			<%} %>

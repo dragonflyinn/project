@@ -56,7 +56,7 @@ h2 {
 			날 짜 :
 			<%=article.getPost_date() %>
 			조회수 :
-			<%=article.getBoard_readcount() %>
+			<%=article.getPost_readcount() %>
 		</section>
 		<section id="articleContentArea">
 			내 용 :
@@ -64,11 +64,9 @@ h2 {
 		</section>
 	</section>
 	<section id="commandList">
-		<a
-			href="boardModifyForm.board?post_serial_number=<%=article.getPost_serial_number() %>">
-			[수정] </a> <a
-			href="boardDeleteForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
-			[삭제] </a> <a href="boardList.board?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
+		<a href="boardModifyForm.board?post_serial_number=<%=article.getPost_serial_number() %>"> [수정] </a> 
+		<a href="boardDeletePro.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>"> [삭제] </a> 
+		<a href="boardList.board?page=<%=nowPage%>"> [목록] </a>&nbsp;&nbsp;
 	</section>
 </body>
 </html>

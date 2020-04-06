@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import Common.getId;
 import vo.BoardBean;
+import vo.UserBean;
 
 public class CustomerDAO {
 
@@ -85,7 +86,7 @@ public class CustomerDAO {
 				board.setUser_id(user_id);
 				board.setPost_title(rs.getString("post_title"));
 				board.setPost_content(rs.getString("post_content"));
-				board.setBoard_readcount(rs.getInt("post_readcount"));
+				board.setPost_readcount(rs.getInt("post_readcount"));
 				board.setPost_date(rs.getDate("post_date"));
 				board.setBoard_re_ref(rs.getInt("board_re_ref"));
 				board.setBoard_re_lev(rs.getInt("board_re_lev"));
@@ -123,7 +124,7 @@ public class CustomerDAO {
 				boardBean.setUser_id(rs.getString("user_id"));
 				boardBean.setPost_title(rs.getString("post_title"));
 				boardBean.setPost_content(rs.getString("post_content"));
-				boardBean.setBoard_readcount(rs.getInt("post_readcount"));
+				boardBean.setPost_readcount(rs.getInt("post_readcount"));
 				boardBean.setPost_date(rs.getDate("post_date"));
 				boardBean.setBoard_re_ref(rs.getInt("board_re_ref"));
 				boardBean.setBoard_re_lev(rs.getInt("board_re_lev"));
@@ -157,7 +158,7 @@ public class CustomerDAO {
 			 if(rs.next()) num =rs.getInt(1)+1; 
 			 else num=1;
 			 
-			sql = "INSERT INTO customer_board (post_title,writing_user_serial_number,post_content,user_id,board_re_ref,board_re_lev,board_re_seq,board_readcount,post_date) VALUES(?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO customer_board (post_title,writing_user_serial_number,post_content,user_id,board_re_ref,board_re_lev,board_re_seq,post_readcount,post_date) VALUES(?,?,?,?,?,?,?,?,now())";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -171,7 +172,7 @@ public class CustomerDAO {
 			pstmt.setInt(5, num);
 			pstmt.setInt(6, 0);
 			pstmt.setInt(7, 0);
-			pstmt.setInt(8, article.getBoard_readcount());
+			pstmt.setInt(8, article.getPost_readcount());
 			insertCount = pstmt.executeUpdate();
 
 		} catch (Exception ex) {
@@ -250,8 +251,31 @@ public class CustomerDAO {
 		return updateCount;
 
 	}
-
+	public boolean isArticleWriter(int post_serial_number, UserBean user_id) {
+		// TODO Auto-generated method stub
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String board_sql="SELECT * FROM customer_board WHERE post_serial_number=?";
+		boolean isWriter = false;
+		
+		try {
+			pstmt=con.prepareStatement(board_sql);
+			pstmt.setInt(1,post_serial_number);
+			rs=pstmt.executeQuery();
+			rs.next();
+			
+			if(user_id.equals(rs.getString("loginUser"))) {
+				isWriter = true;
+			}
+		}catch(SQLException ex) {
+			System.out.println("isArticleWriter 에러: "+ex);
+		}
+		finally {
+			close(pstmt);
+		}
+		return isWriter;
+	}
+}
 	// 글쓴이인지 확인. 세션이 있으니까 괜찮다. 비로그인 게시판일 경우 확인이 필요하니까 isArticleBoardWriter (int
 	// porst_serial_number,string pass)부분이 필요하다.
-
-}
