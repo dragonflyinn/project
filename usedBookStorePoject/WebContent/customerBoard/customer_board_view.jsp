@@ -12,12 +12,15 @@
 <head>
 <meta charset="UTF-8">
 <title>고객센터 글 상세보기</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style type="text/css">
 #articleForm {
-	width: 500px;
-	height: 500px;
-	border: 1px solid red;
+	width: 600px;
+	height: auto;
+	border : 1px solid #e0f1f2;
 	margin: auto;
+	background: #e0f1f2;
+	border-radius : 20px 20px 0px 0px;
 }
 
 h2 {
@@ -30,17 +33,21 @@ h2 {
 }
 
 #articleContentArea {
-	background: orange;
+	background: #e0f1f2;
 	margin-top: 20px;
 	height: 350px;
 	text-align: center;
 	overflow: auto;
+	border-radius : 0px 0px 20px 20px;
 }
 
 #commandList {
-	margin: auto;
-	width: 500px;
+	background: #e0f1f2;
 	text-align: center;
+	margin: auto;
+	width: 600px;
+	text-align: center;
+	border-radius : 0px 0px 20px 20px;
 }
 </style>
 </head>
@@ -59,18 +66,22 @@ h2 {
 			<%=article.getPost_readcount() %>
 		</section>
 		<section id="articleContentArea">
+		<hr style="border: dotted 5px #4dd0e1;">
+		<tr><td><br></td></tr>
 			내 용 :
 			<%=article.getPost_content() %>
 		</section>
+		<hr style="border: dotted 5px #4dd0e1;">
 	</section>
+	
 	<section id="commandList">
-		<a
-			href="boardReplyForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
-			[답변] </a> <a
-			href="boardModifyForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
-			[수정] </a> <a
-			href="boardDeletePro.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>">
-			[삭제] </a> <a href="boardList.board?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
+	<tr><td><br></td></tr>
+		<button type="button" onclick="location.href='boardReplyForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>'">답변</button>
+		<button type="button" onclick="location.href='boardModifyForm.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>'">수정</button>	
+		<button type="button" onclick="location.href='boardDeletePro.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>'">삭제</button>		
+		<button type="button" onclick="location.href='boardList.board?page=<%=nowPage%>'">목록</button><br>
+		
+	<br>
 	</section>
 </body>
 </html>

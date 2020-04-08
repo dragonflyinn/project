@@ -9,37 +9,52 @@
 <head>
 <meta charset="UTF-8"> 
 	<title>공지게시판</title>
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 	<script type="text/javascript">
 	function modifyboard(){
 		modifyform.submit();
 	}
 	</script>
-	<style type="text/css">
-   #registForm{
-      width: 500px;
-      height: 600px;
-      border : 1px solid red; 
-      margin:auto; 
-   }   
-   h2{
-      text-align: center;
-   }
+<style type="text/css">
+	#registForm{
+		width: 500px;
+		height: 600px;
+      	border : 1px solid #e0f1f2;
+		border-radius : 20px 20px 20px 20px;
+		background: #e0f1f2;
+	}   
+	h2{
+		text-align: center;
+		font-family: 'Nanum Pen Script', cursive;
+		font-size: 40px;
+	}
    table{
-      margin:auto;
-      width: 450px;
-      }
-   .td_left{
-      width: 150px;
-      background:orange;
-   }
-   .td_right{
-      width: 300px;
-      background:skyblue;
-   }
-   #commandCell{
-      text-align: center;
+		margin:auto;
+		width: 450px;
+		text-align: center;
+	}
+	.td_left{
+		width: 150px;
+		background:#e0f1f2;
+	}
+	.td_right{
+		width: 300px;
+		background:#e0f1f2;
+	}
+	#commandCell{
+		text-align: center;
       
-   }
+	}
+	button {
+		text-align: center;
+		font-family: 'Nanum Pen Script', cursive;
+		font-size: 20px;
+	}
+	.style1 {
+		text-align: center;
+		font-family: 'Nanum Pen Script', cursive;
+		font-size: 24px;
+	}
 </style>
 </head>
 <body>
@@ -52,13 +67,13 @@
 <table>
 	<tr>
 		<td class="td_left">
-			<label for = "user_id">글쓴이</label>
+			<label for = "user_id" class="style1">글쓴이</label>
 		</td>
 		<td class="td_right"> ${user.user_id } </td>
 	</tr>
 	<tr>
 		<td class="td_left">
-			<label for = "post_title">제 목</label>
+			<label for = "post_title" class="style1">제 목</label>
 		</td>
 		<td class="td_right">
 			<input name="post_title" type="text" id = "post_title" value = "<%=article.getPost_title()%>"/>
@@ -66,7 +81,7 @@
 	</tr>
 	<tr>
 		<td class="td_left">
-			<label for = "post_content">내 용</label>
+			<label for = "post_content" class="style1">내 용</label>
 		</td>
 		<td>
 			<textarea id = "post_content" name="post_content" cols="40" rows="15"><%=article.getPost_content()%></textarea>
@@ -74,8 +89,8 @@
 	</tr>
 </table>
 	<section id = "commandCell">
-			<a href="javascript:modifyboard()">[수정]</a>&nbsp;&nbsp;
-			<a href="javascript:history.go(-1)">[뒤로]</a>
+		<button onclick="javascript:history.go(-1)">이전</button>
+		<button onclick="javascript:modifyboard()">수정</button>
 	</section>
 </form>
 </section>

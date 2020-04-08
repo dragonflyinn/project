@@ -7,17 +7,25 @@
 <head>
 <meta charset="UTF-8">
 <title>회원관리 시스템 관리자모드(회원 목록 보기)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style>
 	#userListArea{
 		width : 400px;
-		border : 1px solid gray;
 		margin : auto;
+		border : 1px solid #e0f1f2;
+		border-radius : 20px 20px 20px 20px;
+		background: #e0f1f2;
 	}
 	table{
 		width : 380px;
 		margin : auto;
 		text-align: center;
 	}
+	button {
+	text-align: center;
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -34,13 +42,13 @@
 			</a>
 		</td>
 		<td>
-		<a href="userInfoModifyAction.me?id=${user.user_id}">수정</a>&nbsp;
-		<a href="userDeleteAction.me?id=${user.user_id}">삭제</a>
+		<button type="button" onclick="location.href='userInfoModifyAction.me?id=${user.user_id} %>'">수정</button>
+		<button type="button" onclick="location.href='userDeleteAction.me?id=${user.user_id} %>'">삭제</button>
 		</td>
 	</tr>
-	</c:forEach> <!-- 반복 -->
+	</c:forEach>
 	<tr>
-		<td><a href="main.me">메인으로 돌아가기</a></td>
+		<button type="button" onclick="location.href='main.me'">메인</button>
 	</tr>
 </table>
 </section>

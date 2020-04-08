@@ -11,14 +11,18 @@
 <head>
 <meta charset="UTF-8" />
 <title>고객센터 답변 게시판</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <script language="javascript">
 	</script>
 <style type="text/css">
+
 #registForm {
 	width: 500px;
-	height: 610px;
-	border: 1px solid red;
+	height: auto;
+	border : 1px solid #e0f1f2;
 	margin: auto;
+	background: #e0f1f2;
+	border-radius : 20px 20px 0px 0px;
 }
 
 h2 {
@@ -32,16 +36,29 @@ table {
 
 .td_left {
 	width: 150px;
-	background: orange;
+	background: #e0f1f2;
+	text-align: center;
 }
 
 .td_right {
 	width: 300px;
-	background: skyblue;
+	background: #e0f1f2;
 }
 
 #commandCell {
 	text-align: center;
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 25px;
+}
+button {
+	text-align: center;
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 20px;
+}
+.style1 {
+	text-align: center;
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 25px;
 }
 </style>
 </head>
@@ -60,21 +77,25 @@ table {
 			<input type="hidden" name="board_re_seq" value="<%=article.getBoard_re_seq() %>">
 			<table>
 				<tr>
-					<td class="td_left"><label for="post_title">제 목</label></td>
-					<td class="td_right"><input name="post_title" type="text"
-						id="post_title" /></td>
+					<td class="td_left">
+					<label for="post_title" class="style1">제 목</label></td>
+					
+					<td class="td_right">
+					<input name="post_title" type="text" id="post_title" /></td>
 				</tr>
-					<td class="td_left"><label for="">글쓴이</label></td>
+					<td class="td_left">
+					<label for="writing_serial_user" class="style1">글쓴이</label></td>
+					
 					<td class="td_right">${user.user_id } </td>
+					
 				<tr>
-					<td class="td_left"><label for="post_content">내 용</label></td>
-					<td><textarea id="post_content" name="post_content"
-							cols="40" rows="15"></textarea></td>
+					<td class="td_left"><label for="post_content" class="style1">내 용</label></td>
+					<td><textarea id="post_content" name="post_content" cols="40" rows="15"></textarea></td>
 				</tr>
 			</table>
 			<section id="commandCell">
-				<input type="submit" value="답변글등록" />&nbsp;&nbsp; <input
-					type="reset" value="다시작성" />
+				<button onclick="javascript:boardform.submit()">답변글등록</button>
+				<button type="button" onclick="javascript:boardform.reset()">다시작성</button>
 			</section>
 		</form>
 	</section>

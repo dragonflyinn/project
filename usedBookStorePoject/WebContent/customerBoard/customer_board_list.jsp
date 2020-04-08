@@ -22,9 +22,10 @@ int endPage = pageInfo.getEndPage();
 <style type="text/css">
 #registForm {
 	width: 500px;
-	height: 600px;
-	border: 1px solid red;
-	margin: auto;
+	height: auto;
+	border : 1px solid #e0f1f2;
+	border-radius : 20px 20px 20px 20px;
+	background: #e0f1f2;
 }
 
 h2 {

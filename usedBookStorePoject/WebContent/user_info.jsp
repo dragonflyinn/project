@@ -37,7 +37,7 @@
 	button {
 		text-align: center;
 		font-family: 'Nanum Pen Script', cursive;
-		font-size: 25px;
+		font-size: 20px;
 	}
 	.style1 {
 		text-align: center;

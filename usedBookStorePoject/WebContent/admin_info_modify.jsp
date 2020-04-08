@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원관리 시스템 관리자모드(회원 등급 부여 페이지)</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <script type="text/javascript">
 	function modifyboard() {
 		modifyform.submit();
@@ -18,7 +18,8 @@
 #userInfoArea {
 	width: 400px;
 	margin: auto;
-	border: 1px solid gray;
+	border-radius : 20px 20px 20px 20px;
+	background: #e0f1f2;
 }
 
 table {
@@ -58,8 +59,8 @@ table {
 				</tr>
 				
 				<tr>
-					<td colspan=2><a href="UserListAction.me">리스트로 돌아가기</a>&nbsp;&nbsp;
-					<a href="javascript:modifyboard()">수정</a></td>
+					<td colspan=2><button type="button" onclick="location.href='userViewAction.me'">이전</button>
+					<button onclick="javascript:modifyboard()">수정</button></td>
 				</tr>
 			</table>
 		</form>

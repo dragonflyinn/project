@@ -21,20 +21,25 @@
 <head>
 <meta charset="UTF-8" />
 <title>문의 게시판</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
 <style type="text/css">
 #listForm {
 	width: 500px;
 	height: auto;
-	border: 1px solid pink;
+	border : 1px solid #e0f1f2;
 	margin: auto;
+	background: #e0f1f2;
+	border-radius : 20px 20px 0px 0px;
 }
 
 #boardForm {
 	width: 500px;
-	height: 610px;
-	border: 1px solid pink;
+	height: auto;
+	border : 1px solid #e0f1f2;
 	margin: auto;
+	background: #e0f1f2;
+	border-radius : 0px 0px 20px 20px;
 }
 
 #registForm {
@@ -63,6 +68,9 @@
 	margin: auto;
 	width: 500px;
 	text-align: center;
+	background: #e0f1f2;
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 20px;
 }
 
 h2 {
@@ -77,11 +85,25 @@ table {
 .td_left {
 	width: 150px;
 	background: pink;
+	text-align: center;
 }
 
 .td_right {
 	width: 300px;
-	background: skyblue;
+	background: white;
+}
+.style1 {
+	text-align: center;
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 20px;
+}
+button {
+		text-align: center;
+		font-family: 'Nanum Pen Script', cursive;
+		font-size: 20px;
+	}
+a {
+	text-decoration: none;
 }
 </style>
 </head>
@@ -129,6 +151,7 @@ table {
 		</section>
 
 		<section id="pageList">
+		<tr><td><br></td></tr>
 			<%
 				if (nowPage <= 1) {
 			%>
@@ -167,27 +190,33 @@ table {
 
 	<form action="boardWritePro.board" method="post" name="boardform">
 		<section id="boardForm">
+		
+			<tr><td><br></td></tr>
+			<hr style="border: dotted 5px #4dd0e1;">
+			
 			<h2>문의글 등록</h2>
 
 			<input type="hidden" name="post_serial_number"
 				value="${board.post_serial_number}" />
 			<table>
 				<tr>
-					<td class="td_left"><label for="post_title">제 목</label></td>
-					<td class="td_right"><input name="post_title" type="text"
-						id="post_title" required="required" /></td>
+					<td class="td_left">
+					<label for="post_title" class="style1">제 목</label></td>
+					<td class="td_right">
+					<input name="post_title" type="text" id="post_title" required="required" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="post_content">내 용</label></td>
-					<td><textarea id="post_content" name="post_content" cols="40"
-							rows="15" required="required"></textarea></td>
+					<td class="td_left"><label for="post_content" class="style1">내 용</label></td>
+					<td><textarea id="post_content" name="post_content" cols="40" rows="15" required="required"></textarea></td>
 				</tr>
 			</table>
 
 			<section id="commandCell">
-				<input type="submit" value="등록" />&nbsp;&nbsp; <input type="reset"
-					value="다시 작성" />
+			<tr><td><br></td></tr>
+				<button onclick="javascript:boardform.submit()">등록</button>
+				<button type="button" onclick="javascript:joinform.reset()">다시작성</button>
 			</section>
+			<tr><td><br></td></tr>
 		</section>
 	</form>
 

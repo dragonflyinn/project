@@ -5,12 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>공지게시판</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style type="text/css">
 #registForm {
 	width: 500px;
-	height: 610px;
-	border: 1px solid red;
+	height: auto;
+	border : 1px solid #e0f1f2;
 	margin: auto;
+	background: #e0f1f2;
+	border-radius : 20px 20px 0px 0px;
 }
 
 h2 {
@@ -24,12 +27,12 @@ table {
 
 .td_left {
 	width: 150px;
-	background: orange;
+	background: pink;
 }
 
 .td_right {
 	width: 300px;
-	background: skyblue;
+	background: white;
 }
 
 #commandCell {

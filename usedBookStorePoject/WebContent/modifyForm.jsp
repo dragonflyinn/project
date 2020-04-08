@@ -8,13 +8,20 @@
 #modifyformArea {
 	width: 400px;
 	margin: auto;
-	border: 1px solid gray;
+	border-radius : 20px 20px 20px 20px;
+	background: #e0f1f2;
 }
 
 table {
 	width: 380px;
 	margin: auto;
 	text-align: center;
+}
+
+button {
+		text-align: center;
+		font-family: 'Nanum Pen Script', cursive;
+		font-size: 25px;
 }
 </style>
 </head>
@@ -41,6 +48,8 @@ table {
 				</tr>
 				<tr>
 					<td colspan=2>
+					<button type="button" onclick="location.href='UserListAction.me'">회원가입</button>
+					<button onclick="javascript:modifyboard()">수정</button>
 						<a href="UserListAction.me">리스트로 돌아가기</a>&nbsp;
 						<a href="javascript:modifyboard()">수정</a>
 					</td>

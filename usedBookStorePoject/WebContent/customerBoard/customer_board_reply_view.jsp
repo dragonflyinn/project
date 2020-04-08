@@ -12,12 +12,15 @@
 <head>
 <meta charset="UTF-8">
 <title>고객센터 답변글 상세보기</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style type="text/css">
 #articleForm {
 	width: 500px;
-	height: 500px;
-	border: 1px solid red;
+	height: auto;
+	border : 1px solid #e0f1f2;
 	margin: auto;
+	background: #e0f1f2;
+	border-radius : 20px 20px 0px 0px;
 }
 
 h2 {
@@ -42,6 +45,12 @@ h2 {
 	width: 500px;
 	text-align: center;
 }
+
+button {
+		text-align: center;
+		font-family: 'Nanum Pen Script', cursive;
+		font-size: 25px;
+}
 </style>
 </head>
 
@@ -64,6 +73,10 @@ h2 {
 		</section>
 	</section>
 	<section id="commandList">
+		<button type="button" onclick="location.href='boardModifyForm.board?post_serial_number=<%=article.getPost_serial_number() %>'">수정</button>
+		<button type="button" onclick="location.href='boardDeletePro.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>'">삭제</button>
+		<button type="button" onclick="boardList.board?page=<%=nowPage%>'">목록</button>
+	
 		<a href="boardModifyForm.board?post_serial_number=<%=article.getPost_serial_number() %>"> [수정] </a> 
 		<a href="boardDeletePro.board?post_serial_number=<%=article.getPost_serial_number() %>&page=<%=nowPage%>"> [삭제] </a> 
 		<a href="boardList.board?page=<%=nowPage%>"> [목록] </a>&nbsp;&nbsp;

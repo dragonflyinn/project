@@ -12,6 +12,7 @@
 <head>
 <meta charset="UTF-8"> 
 	<title>고객센터 게시판</title>
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 	<script type="text/javascript">
 	function modifyboard(){
 		modifyform.submit();
@@ -21,28 +22,39 @@
    #registForm{
       width: 500px;
       height: 600px;
-      border : 1px solid red; 
       margin:auto; 
-   }   
+      border : 1px solid #e0f1f2;
+      border-radius : 20px 20px 20px 20px;
+      background: #e0f1f2;
+   }  
+    
    h2{
       text-align: center;
    }
+   
    table{
       margin:auto;
       width: 450px;
-      }
+      text-align: center;
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: 25px;
+}
+
    .td_left{
       width: 150px;
       background:orange;
    }
+   
    .td_right{
       width: 300px;
       background:skyblue;
    }
+   
    #commandCell{
       text-align: center;
       
    }
+   
 </style>
 </head>
 <body>
@@ -80,8 +92,8 @@
 	</tr>
 </table>
 	<section id = "commandCell">
-			<a href="javascript:modifyboard()">[수정]</a>&nbsp;&nbsp;
-			<a href="javascript:history.go(-1)">[뒤로]</a>
+		<button onclick="javascript:history.go(-1)">이전</button>
+		<button onclick="javascript:modifyboard()">수정</button>
 	</section>
 </form>
 </section>

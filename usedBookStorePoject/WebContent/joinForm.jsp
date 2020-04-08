@@ -12,7 +12,6 @@
 		border : 1px solid #e0f1f2;
 		border-radius : 20px 20px 20px 20px;
 		background: #e0f1f2;
-		
 	}
 	
 	table{
@@ -26,7 +25,7 @@
 	button {
 		text-align: center;
 		font-family: 'Nanum Pen Script', cursive;
-		font-size: 25px;
+		font-size: 20px;
 	}
 </style>
 </head>
@@ -36,7 +35,7 @@
 <table>
 	<tr>
 		<td colspan="2">
-			<h1>회원가입 페이지</h1>
+			<h1>회원가입</h1>
 		</td>
 	</tr>
 	<tr>
@@ -54,13 +53,12 @@
 	<tr><td><br></td></tr>
 	<tr>
 		<td colspan="2">
-		<button onclick="javascript:joinform.submit()">회원가입</button>&nbsp;&nbsp;
-		<button type="button" onclick="javascript:joinform.reset()">다시작성</button>&nbsp;&nbsp;
-			
-			<!-- <a href="javascript:joinform.reset()">다시작성</a> -->
+		<button type="button" onclick="location.href='userViewAction.me'">이전</button>
+		<button onclick="javascript:joinform.submit()">회원가입</button>
+		<button type="button" onclick="javascript:joinform.reset()">다시작성</button>
 		</td>
-		<tr><td><br></td></tr>
 	</tr>
+	<tr><td><br></td></tr>
 </table>
 </form>
 </section>

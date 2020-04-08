@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>고객센터 게시판</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style type="text/css">
 #registForm {
 	width: 500px;

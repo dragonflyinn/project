@@ -56,10 +56,10 @@
 				<td class="style1">도서명 :</td>
 				<td><input type="text" name="book_name"></td>
 			</tr>
+			<tr><td><br></td></tr>
 			<tr>
-			
 				<td colspan=2 align=center>
-				<input type="submit" value="확인"></td>
+				<button onclick="javascript:bookform.submit()">확인</button></td>
 			</tr>
 			<tr><td><br></td></tr>
 		</table>
